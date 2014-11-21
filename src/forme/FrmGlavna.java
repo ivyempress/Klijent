@@ -5,6 +5,11 @@
  */
 package forme;
 
+import forme.organizacija.FrmUnosOrganizacije;
+import java.awt.BorderLayout;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Ivana
@@ -14,6 +19,7 @@ public class FrmGlavna extends javax.swing.JFrame {
     /**
      * Creates new form FrmGlavna
      */
+    private JPanel aktivniPanel = this.jPanelGlavna;
     public FrmGlavna() {
         initComponents();
     }
@@ -28,51 +34,70 @@ public class FrmGlavna extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jPanelGlavna = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jmiDodavanjeOrganizacije = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(240, 217, 163));
         setResizable(false);
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout1.setAlignOnBaseline(true);
+        getContentPane().setLayout(flowLayout1);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivana\\Desktop\\seminarski iz softvera\\IVANA\\HomeBanner_4-0001.jpg")); // NOI18N
-        jLabel1.setText("jLabel1");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        getContentPane().add(jLabel1);
 
-        jTextField1.setText("jTextField1");
+        jPanelGlavna.setPreferredSize(new java.awt.Dimension(640, 350));
+
+        javax.swing.GroupLayout jPanelGlavnaLayout = new javax.swing.GroupLayout(jPanelGlavna);
+        jPanelGlavna.setLayout(jPanelGlavnaLayout);
+        jPanelGlavnaLayout.setHorizontalGroup(
+            jPanelGlavnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+        jPanelGlavnaLayout.setVerticalGroup(
+            jPanelGlavnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanelGlavna);
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
 
-        jMenu1.setText("File");
+        jMenu1.setText("Organizacija");
+
+        jmiDodavanjeOrganizacije.setText("Dodavanje nove organizacije");
+        jmiDodavanjeOrganizacije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDodavanjeOrganizacijeActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiDodavanjeOrganizacije);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Član");
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Životinja");
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(42, 42, 42)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 408, Short.MAX_VALUE))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiDodavanjeOrganizacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDodavanjeOrganizacijeActionPerformed
+        FrmUnosOrganizacije f = new FrmUnosOrganizacije();
+        postaviAktivniPanel(f);
+    }//GEN-LAST:event_jmiDodavanjeOrganizacijeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,7 +138,24 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel jPanelGlavna;
+    private javax.swing.JMenuItem jmiDodavanjeOrganizacije;
     // End of variables declaration//GEN-END:variables
+
+      private void postaviAktivniPanel(JPanel panel) {
+        if (aktivniPanel != null) {
+            this.remove(aktivniPanel);
+        }
+        this.jPanelGlavna.add(panel);
+        aktivniPanel = panel;
+        repaint();
+        validate();
+    }
+
+
+
+
+
 }
