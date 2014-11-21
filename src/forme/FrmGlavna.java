@@ -19,7 +19,7 @@ public class FrmGlavna extends javax.swing.JFrame {
     /**
      * Creates new form FrmGlavna
      */
-    private JPanel aktivniPanel = this.jPanelGlavna;
+    private JPanel aktivniPanel ;
     public FrmGlavna() {
         initComponents();
     }
@@ -34,7 +34,7 @@ public class FrmGlavna extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanelGlavna = new javax.swing.JPanel();
+        jpPanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmiDodavanjeOrganizacije = new javax.swing.JMenuItem();
@@ -44,31 +44,21 @@ public class FrmGlavna extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(240, 217, 163));
+        setFocusTraversalPolicyProvider(true);
+        setMinimumSize(new java.awt.Dimension(900, 800));
         setResizable(false);
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
-        flowLayout1.setAlignOnBaseline(true);
-        getContentPane().setLayout(flowLayout1);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/forme/maca.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jLabel1);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 140));
 
-        jPanelGlavna.setPreferredSize(new java.awt.Dimension(640, 350));
-
-        javax.swing.GroupLayout jPanelGlavnaLayout = new javax.swing.GroupLayout(jPanelGlavna);
-        jPanelGlavna.setLayout(jPanelGlavnaLayout);
-        jPanelGlavnaLayout.setHorizontalGroup(
-            jPanelGlavnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
-        );
-        jPanelGlavnaLayout.setVerticalGroup(
-            jPanelGlavnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanelGlavna);
+        jpPanel.setLayout(new java.awt.GridLayout());
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, -1));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
+        jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));
 
         jMenu1.setText("Organizacija");
 
@@ -139,15 +129,15 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanelGlavna;
     private javax.swing.JMenuItem jmiDodavanjeOrganizacije;
+    private javax.swing.JPanel jpPanel;
     // End of variables declaration//GEN-END:variables
 
       private void postaviAktivniPanel(JPanel panel) {
         if (aktivniPanel != null) {
             this.remove(aktivniPanel);
         }
-        this.jPanelGlavna.add(panel);
+        this.jpPanel.add(panel);
         aktivniPanel = panel;
         repaint();
         validate();
