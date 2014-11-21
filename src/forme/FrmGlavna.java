@@ -50,7 +50,6 @@ public class FrmGlavna extends javax.swing.JFrame {
         getContentPane().setLayout(flowLayout1);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivana\\Desktop\\seminarski iz softvera\\IVANA\\HomeBanner_4-0001.jpg")); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1);
 

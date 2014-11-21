@@ -66,9 +66,6 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Ivana\Desktop\seminarski iz softvera\IVANA\HomeBanner_4-0001.jpg"/>
-        </Property>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
