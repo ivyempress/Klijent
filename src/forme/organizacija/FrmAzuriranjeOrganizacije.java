@@ -36,11 +36,11 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jtfNazivOrganizacije = new javax.swing.JTextField();
         jtfImeOsnivaca = new javax.swing.JTextField();
-        jtfDatumOsnivanja = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtfOpisDelatnosti = new javax.swing.JTextArea();
         jbtSacuvaj = new javax.swing.JButton();
         jbtPonisti = new javax.swing.JButton();
+        jdcDatumOsnivanja = new com.toedter.calendar.JDateChooser();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje organizacije", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
         setMinimumSize(new java.awt.Dimension(100, 100));
@@ -63,12 +63,6 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
         jtfImeOsnivaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfImeOsnivacaActionPerformed(evt);
-            }
-        });
-
-        jtfDatumOsnivanja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDatumOsnivanjaActionPerformed(evt);
             }
         });
 
@@ -100,10 +94,10 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(43, 43, 43)
                         .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfImeOsnivaca)
+                            .addComponent(jtfImeOsnivaca, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                             .addComponent(jtfNazivOrganizacije)
-                            .addComponent(jtfDatumOsnivanja, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jpUnosOrganizacijeLayout.setVerticalGroup(
@@ -117,11 +111,11 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfImeOsnivaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfDatumOsnivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(31, 31, 31)
+                .addGap(24, 24, 24)
+                .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,7 +138,7 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addGap(98, 98, 98)
                         .addComponent(jcbListaOrganizacija, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,10 +157,6 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfImeOsnivacaActionPerformed
 
-    private void jtfDatumOsnivanjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDatumOsnivanjaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDatumOsnivanjaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -178,8 +168,8 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
     private javax.swing.JButton jbtPonisti;
     private javax.swing.JButton jbtSacuvaj;
     private javax.swing.JComboBox jcbListaOrganizacija;
+    private com.toedter.calendar.JDateChooser jdcDatumOsnivanja;
     private javax.swing.JPanel jpUnosOrganizacije;
-    private javax.swing.JTextField jtfDatumOsnivanja;
     private javax.swing.JTextField jtfImeOsnivaca;
     private javax.swing.JTextField jtfNazivOrganizacije;
     private javax.swing.JTextArea jtfOpisDelatnosti;
