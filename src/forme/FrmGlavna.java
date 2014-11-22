@@ -36,31 +36,46 @@ public class FrmGlavna extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jpPanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jmiDodavanjeOrganizacije = new javax.swing.JMenuItem();
+        jmiAzuriranjeOrganizacije = new javax.swing.JMenuItem();
+        jmiBrisanjeOrganizacije = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jmiDodavanjeClana = new javax.swing.JMenuItem();
+        jmiAzuriranjeClana = new javax.swing.JMenuItem();
+        jmiBrisanjeClana = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jmiDodavanjeZivotinje = new javax.swing.JMenuItem();
+        jmiAzuriranjeZivotinje = new javax.swing.JMenuItem();
+        jmiBrisanjeZivotinje = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(240, 217, 163));
         setFocusTraversalPolicyProvider(true);
-        setMinimumSize(new java.awt.Dimension(900, 800));
+        setMinimumSize(new java.awt.Dimension(640, 700));
+        setPreferredSize(new java.awt.Dimension(640, 199));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/forme/maca.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 140));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jpPanel.setLayout(new java.awt.GridLayout());
-        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, -1));
+        jpPanel.setMinimumSize(new java.awt.Dimension(630, 0));
+        jpPanel.setPreferredSize(new java.awt.Dimension(630, 0));
+        jpPanel.setLayout(new java.awt.GridLayout(1, 0));
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 630, 360));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));
 
-        jMenu1.setText("Organizacija");
+        jMenu4.setText("Početna!     ");
+        jMenuBar1.add(jMenu4);
+
+        jMenu1.setText("Organizacija     ");
 
         jmiDodavanjeOrganizacije.setText("Dodavanje nove organizacije");
         jmiDodavanjeOrganizacije.addActionListener(new java.awt.event.ActionListener() {
@@ -70,12 +85,38 @@ public class FrmGlavna extends javax.swing.JFrame {
         });
         jMenu1.add(jmiDodavanjeOrganizacije);
 
+        jmiAzuriranjeOrganizacije.setText("Ažuriranje organizacije");
+        jMenu1.add(jmiAzuriranjeOrganizacije);
+
+        jmiBrisanjeOrganizacije.setText("Brisanje organizacije");
+        jMenu1.add(jmiBrisanjeOrganizacije);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Član");
+        jMenu2.setText("Član     ");
+
+        jmiDodavanjeClana.setText("Dodavanje novog člana");
+        jMenu2.add(jmiDodavanjeClana);
+
+        jmiAzuriranjeClana.setText("Ažuriranje člana");
+        jMenu2.add(jmiAzuriranjeClana);
+
+        jmiBrisanjeClana.setText("Brisanje člana");
+        jMenu2.add(jmiBrisanjeClana);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Životinja");
+
+        jmiDodavanjeZivotinje.setText("Dodavanje nove životinje");
+        jMenu3.add(jmiDodavanjeZivotinje);
+
+        jmiAzuriranjeZivotinje.setText("Ažuriranje životinje");
+        jMenu3.add(jmiAzuriranjeZivotinje);
+
+        jmiBrisanjeZivotinje.setText("Brisanje životinje");
+        jMenu3.add(jmiBrisanjeZivotinje);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -128,8 +169,17 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jmiAzuriranjeClana;
+    private javax.swing.JMenuItem jmiAzuriranjeOrganizacije;
+    private javax.swing.JMenuItem jmiAzuriranjeZivotinje;
+    private javax.swing.JMenuItem jmiBrisanjeClana;
+    private javax.swing.JMenuItem jmiBrisanjeOrganizacije;
+    private javax.swing.JMenuItem jmiBrisanjeZivotinje;
+    private javax.swing.JMenuItem jmiDodavanjeClana;
     private javax.swing.JMenuItem jmiDodavanjeOrganizacije;
+    private javax.swing.JMenuItem jmiDodavanjeZivotinje;
     private javax.swing.JPanel jpPanel;
     // End of variables declaration//GEN-END:variables
 
