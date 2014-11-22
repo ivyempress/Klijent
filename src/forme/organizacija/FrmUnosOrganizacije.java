@@ -27,17 +27,24 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jtfNazivOrganizacije = new javax.swing.JTextField();
         jtfImeOsnivaca = new javax.swing.JTextField();
-        jtfDatumOsnivanja = new javax.swing.JTextField();
         jbtSacuvaj = new javax.swing.JButton();
         jbtPonisti = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtaOpisDelatnosti = new javax.swing.JTextArea();
+        jdcDatumOsnivanja = new com.toedter.calendar.JDateChooser();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unos nove organizacije", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
         setMinimumSize(new java.awt.Dimension(100, 100));
@@ -54,12 +61,6 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
         jtfImeOsnivaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfImeOsnivacaActionPerformed(evt);
-            }
-        });
-
-        jtfDatumOsnivanja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDatumOsnivanjaActionPerformed(evt);
             }
         });
 
@@ -88,9 +89,9 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jtfImeOsnivaca, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(jtfNazivOrganizacije, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(jtfDatumOsnivanja, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(jbtPonisti, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(174, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,9 +106,9 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jtfImeOsnivaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfDatumOsnivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -124,21 +125,20 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfImeOsnivacaActionPerformed
 
-    private void jtfDatumOsnivanjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDatumOsnivanjaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDatumOsnivanjaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jbtPonisti;
     private javax.swing.JButton jbtSacuvaj;
+    private com.toedter.calendar.JDateChooser jdcDatumOsnivanja;
     private javax.swing.JTextArea jtaOpisDelatnosti;
-    private javax.swing.JTextField jtfDatumOsnivanja;
     private javax.swing.JTextField jtfImeOsnivaca;
     private javax.swing.JTextField jtfNazivOrganizacije;
     // End of variables declaration//GEN-END:variables
