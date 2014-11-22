@@ -5,7 +5,14 @@
  */
 package forme;
 
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
+import forme.clan.FrmAzuriranjeClana;
+import forme.clan.FrmBrisanjeClana;
+import forme.organizacija.FrmAzuriranjeOrganizacije;
+import forme.organizacija.FrmBrisanjeOrganizacije;
 import forme.organizacija.FrmUnosOrganizacije;
+import forme.zivotinja.FrmAzuriranjeZivotinje;
+import forme.zivotinja.FrmBrisanjeZivotinje;
 import java.awt.BorderLayout;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -19,7 +26,8 @@ public class FrmGlavna extends javax.swing.JFrame {
     /**
      * Creates new form FrmGlavna
      */
-    private JPanel aktivniPanel ;
+    private JPanel aktivniPanel;
+
     public FrmGlavna() {
         initComponents();
     }
@@ -54,7 +62,7 @@ public class FrmGlavna extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(240, 217, 163));
         setFocusTraversalPolicyProvider(true);
-        setMinimumSize(new java.awt.Dimension(640, 700));
+        setMinimumSize(new java.awt.Dimension(640, 800));
         setPreferredSize(new java.awt.Dimension(640, 199));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -67,7 +75,7 @@ public class FrmGlavna extends javax.swing.JFrame {
         jpPanel.setMinimumSize(new java.awt.Dimension(630, 0));
         jpPanel.setPreferredSize(new java.awt.Dimension(630, 0));
         jpPanel.setLayout(new java.awt.GridLayout(1, 0));
-        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 630, 360));
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 630, 490));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));
@@ -86,9 +94,19 @@ public class FrmGlavna extends javax.swing.JFrame {
         jMenu1.add(jmiDodavanjeOrganizacije);
 
         jmiAzuriranjeOrganizacije.setText("Ažuriranje organizacije");
+        jmiAzuriranjeOrganizacije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAzuriranjeOrganizacijeActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiAzuriranjeOrganizacije);
 
         jmiBrisanjeOrganizacije.setText("Brisanje organizacije");
+        jmiBrisanjeOrganizacije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBrisanjeOrganizacijeActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmiBrisanjeOrganizacije);
 
         jMenuBar1.add(jMenu1);
@@ -96,12 +114,27 @@ public class FrmGlavna extends javax.swing.JFrame {
         jMenu2.setText("Član     ");
 
         jmiDodavanjeClana.setText("Dodavanje novog člana");
+        jmiDodavanjeClana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDodavanjeClanaActionPerformed(evt);
+            }
+        });
         jMenu2.add(jmiDodavanjeClana);
 
         jmiAzuriranjeClana.setText("Ažuriranje člana");
+        jmiAzuriranjeClana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAzuriranjeClanaActionPerformed(evt);
+            }
+        });
         jMenu2.add(jmiAzuriranjeClana);
 
         jmiBrisanjeClana.setText("Brisanje člana");
+        jmiBrisanjeClana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBrisanjeClanaActionPerformed(evt);
+            }
+        });
         jMenu2.add(jmiBrisanjeClana);
 
         jMenuBar1.add(jMenu2);
@@ -109,12 +142,27 @@ public class FrmGlavna extends javax.swing.JFrame {
         jMenu3.setText("Životinja");
 
         jmiDodavanjeZivotinje.setText("Dodavanje nove životinje");
+        jmiDodavanjeZivotinje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDodavanjeZivotinjeActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmiDodavanjeZivotinje);
 
         jmiAzuriranjeZivotinje.setText("Ažuriranje životinje");
+        jmiAzuriranjeZivotinje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAzuriranjeZivotinjeActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmiAzuriranjeZivotinje);
 
         jmiBrisanjeZivotinje.setText("Brisanje životinje");
+        jmiBrisanjeZivotinje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBrisanjeZivotinjeActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmiBrisanjeZivotinje);
 
         jMenuBar1.add(jMenu3);
@@ -128,6 +176,44 @@ public class FrmGlavna extends javax.swing.JFrame {
         FrmUnosOrganizacije f = new FrmUnosOrganizacije();
         postaviAktivniPanel(f);
     }//GEN-LAST:event_jmiDodavanjeOrganizacijeActionPerformed
+
+    private void jmiAzuriranjeOrganizacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAzuriranjeOrganizacijeActionPerformed
+        FrmAzuriranjeOrganizacije fao = new FrmAzuriranjeOrganizacije();
+        postaviAktivniPanel(fao);
+    }//GEN-LAST:event_jmiAzuriranjeOrganizacijeActionPerformed
+
+    private void jmiBrisanjeOrganizacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBrisanjeOrganizacijeActionPerformed
+        FrmBrisanjeOrganizacije fao = new FrmBrisanjeOrganizacije();
+        postaviAktivniPanel(fao);
+    }//GEN-LAST:event_jmiBrisanjeOrganizacijeActionPerformed
+
+    private void jmiDodavanjeClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDodavanjeClanaActionPerformed
+
+    }//GEN-LAST:event_jmiDodavanjeClanaActionPerformed
+
+    private void jmiAzuriranjeClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAzuriranjeClanaActionPerformed
+        FrmAzuriranjeClana fac = new FrmAzuriranjeClana();
+        postaviAktivniPanel(fac);
+    }//GEN-LAST:event_jmiAzuriranjeClanaActionPerformed
+
+    private void jmiBrisanjeClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBrisanjeClanaActionPerformed
+        FrmBrisanjeClana brisanjeClana = new FrmBrisanjeClana();
+        postaviAktivniPanel(brisanjeClana);
+    }//GEN-LAST:event_jmiBrisanjeClanaActionPerformed
+
+    private void jmiDodavanjeZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDodavanjeZivotinjeActionPerformed
+        FrmUnosOrganizacije fuo = new FrmUnosOrganizacije();
+        postaviAktivniPanel(fuo);
+    }//GEN-LAST:event_jmiDodavanjeZivotinjeActionPerformed
+
+    private void jmiAzuriranjeZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAzuriranjeZivotinjeActionPerformed
+        FrmAzuriranjeZivotinje faz = new FrmAzuriranjeZivotinje();
+    }//GEN-LAST:event_jmiAzuriranjeZivotinjeActionPerformed
+
+    private void jmiBrisanjeZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBrisanjeZivotinjeActionPerformed
+        FrmBrisanjeZivotinje fbz = new FrmBrisanjeZivotinje();
+        postaviAktivniPanel(fbz);
+    }//GEN-LAST:event_jmiBrisanjeZivotinjeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,18 +269,14 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JPanel jpPanel;
     // End of variables declaration//GEN-END:variables
 
-      private void postaviAktivniPanel(JPanel panel) {
+    private void postaviAktivniPanel(JPanel panel) {
         if (aktivniPanel != null) {
-            this.remove(aktivniPanel);
+            jpPanel.remove(aktivniPanel);
         }
-        this.jpPanel.add(panel);
+        jpPanel.add(panel);
         aktivniPanel = panel;
-        repaint();
-        validate();
+        getContentPane().repaint();
+        getContentPane().validate();
     }
-
-
-
-
 
 }
