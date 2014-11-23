@@ -7,6 +7,7 @@ package forme;
 
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import forme.clan.FrmAzuriranjeClana;
+import forme.clan.FrmUnosClana;
 import forme.clan.FrmBrisanjeClana;
 import forme.organizacija.FrmAzuriranjeOrganizacije;
 import forme.organizacija.FrmBrisanjeOrganizacije;
@@ -28,7 +29,7 @@ public class FrmGlavna extends javax.swing.JFrame {
      * Creates new form FrmGlavna
      */
     private JPanel aktivniPanel;
-
+    
     public FrmGlavna() {
         initComponents();
         postaviIkonicu();
@@ -64,19 +65,19 @@ public class FrmGlavna extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(240, 217, 163));
         setFocusTraversalPolicyProvider(true);
-        setMinimumSize(new java.awt.Dimension(640, 800));
+        setMinimumSize(new java.awt.Dimension(640, 760));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/forme/maca.png"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 480, 220));
 
-        jpPanel.setMinimumSize(new java.awt.Dimension(630, 0));
-        jpPanel.setPreferredSize(new java.awt.Dimension(630, 0));
+        jpPanel.setMinimumSize(new java.awt.Dimension(630, 760));
+        jpPanel.setPreferredSize(new java.awt.Dimension(630, 760));
         jpPanel.setLayout(new java.awt.GridLayout(1, 0));
-        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 630, 490));
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 630, 410));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));
@@ -189,7 +190,8 @@ public class FrmGlavna extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiBrisanjeOrganizacijeActionPerformed
 
     private void jmiDodavanjeClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDodavanjeClanaActionPerformed
-
+        FrmUnosClana fuc = new FrmUnosClana();
+        postaviAktivniPanel(fuc);
     }//GEN-LAST:event_jmiDodavanjeClanaActionPerformed
 
     private void jmiAzuriranjeClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAzuriranjeClanaActionPerformed
@@ -209,6 +211,7 @@ public class FrmGlavna extends javax.swing.JFrame {
 
     private void jmiAzuriranjeZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAzuriranjeZivotinjeActionPerformed
         FrmAzuriranjeZivotinje faz = new FrmAzuriranjeZivotinje();
+        postaviAktivniPanel(faz);
     }//GEN-LAST:event_jmiAzuriranjeZivotinjeActionPerformed
 
     private void jmiBrisanjeZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBrisanjeZivotinjeActionPerformed
@@ -279,10 +282,10 @@ public class FrmGlavna extends javax.swing.JFrame {
         getContentPane().repaint();
         getContentPane().validate();
     }
-
+    
     private void postaviIkonicu() {
         ImageIcon img = new ImageIcon("dog.png");
         setIconImage(img.getImage());
     }
-
+    
 }

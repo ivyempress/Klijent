@@ -16,6 +16,7 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
      */
     public FrmAzuriranjeOrganizacije() {
         initComponents();
+      //  popuniKomboBoks();
     }
 
     /**
@@ -44,7 +45,7 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje organizacije", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
         setMinimumSize(new java.awt.Dimension(100, 100));
-        setPreferredSize(new java.awt.Dimension(600, 425));
+        setName(""); // NOI18N
 
         jLabel1.setText("Lista organizacija:");
 
@@ -82,10 +83,6 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpUnosOrganizacijeLayout.createSequentialGroup()
-                        .addComponent(jbtSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpUnosOrganizacijeLayout.createSequentialGroup()
                         .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -94,11 +91,16 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(43, 43, 43)
                         .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfImeOsnivaca, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(jtfImeOsnivaca)
                             .addComponent(jtfNazivOrganizacije)
                             .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                        .addContainerGap(29, Short.MAX_VALUE))
+                    .addGroup(jpUnosOrganizacijeLayout.createSequentialGroup()
+                        .addComponent(jbtSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
         jpUnosOrganizacijeLayout.setVerticalGroup(
             jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,11 +121,11 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtSacuvaj)
-                    .addComponent(jbtPonisti))
-                .addContainerGap())
+                    .addComponent(jbtPonisti)
+                    .addComponent(jbtSacuvaj))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -138,18 +140,18 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addGap(98, 98, 98)
                         .addComponent(jcbListaOrganizacija, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jcbListaOrganizacija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jpUnosOrganizacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,4 +176,6 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
     private javax.swing.JTextField jtfNazivOrganizacije;
     private javax.swing.JTextArea jtfOpisDelatnosti;
     // End of variables declaration//GEN-END:variables
+
+   
 }

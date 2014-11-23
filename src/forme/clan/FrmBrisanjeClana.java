@@ -5,6 +5,8 @@
  */
 package forme.clan;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ivana
@@ -12,7 +14,7 @@ package forme.clan;
 public class FrmBrisanjeClana extends javax.swing.JPanel {
 
     /**
-     * Creates new form FrmBrisanjeClana
+     * Creates new form FrmUnosClana
      */
     public FrmBrisanjeClana() {
         initComponents();
@@ -27,19 +29,138 @@ public class FrmBrisanjeClana extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jbtPrikaziSveClanove = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtblTabelaOrganizacija = new javax.swing.JTable();
+        jbtObrisi = new javax.swing.JButton();
+        jlUnesiteKriterijumPretrageKursa = new javax.swing.JLabel();
+        jtfKriterijumPretrage = new javax.swing.JTextField();
+        jbtPronadjiOrganizaciju = new javax.swing.JButton();
+        jlKriterijumiKursa = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Obriši člana", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+
+        jbtPrikaziSveClanove.setText("Prikaži sve članove");
+        jbtPrikaziSveClanove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPrikaziSveClanoveActionPerformed(evt);
+            }
+        });
+
+        jtblTabelaOrganizacija.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtblTabelaOrganizacija.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblTabelaOrganizacijaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtblTabelaOrganizacija);
+
+        jbtObrisi.setText("Obriši člana");
+
+        jlUnesiteKriterijumPretrageKursa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlUnesiteKriterijumPretrageKursa.setText("Unesite kriterijum pretrage :");
+
+        jtfKriterijumPretrage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfKriterijumPretrageActionPerformed(evt);
+            }
+        });
+
+        jbtPronadjiOrganizaciju.setText("Pronađi");
+        jbtPronadjiOrganizaciju.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPronadjiOrganizacijuActionPerformed(evt);
+            }
+        });
+
+        jlKriterijumiKursa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlKriterijumiKursa.setText("naziv");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbtPrikaziSveClanove, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlUnesiteKriterijumPretrageKursa)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlKriterijumiKursa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbtPronadjiOrganizaciju))
+                            .addComponent(jtfKriterijumPretrage, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlUnesiteKriterijumPretrageKursa)
+                    .addComponent(jtfKriterijumPretrage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlKriterijumiKursa)
+                    .addComponent(jbtPronadjiOrganizaciju))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtObrisi)
+                    .addComponent(jbtPrikaziSveClanove))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtPrikaziSveClanoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPrikaziSveClanoveActionPerformed
+
+    }//GEN-LAST:event_jbtPrikaziSveClanoveActionPerformed
+
+    private void jtblTabelaOrganizacijaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblTabelaOrganizacijaMouseClicked
+        // TODO add your handling code here:
+        int row = jtblTabelaOrganizacija.rowAtPoint(evt.getPoint());
+        int col = jtblTabelaOrganizacija.columnAtPoint(evt.getPoint());
+        if ( col == 2) {
+            String opis = (String) jtblTabelaOrganizacija.getModel().getValueAt(row, col);
+            JOptionPane.showMessageDialog(this, opis, "Opis kursa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jtblTabelaOrganizacijaMouseClicked
+
+    private void jtfKriterijumPretrageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfKriterijumPretrageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfKriterijumPretrageActionPerformed
+
+    private void jbtPronadjiOrganizacijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPronadjiOrganizacijuActionPerformed
+
+    }//GEN-LAST:event_jbtPronadjiOrganizacijuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtObrisi;
+    private javax.swing.JButton jbtPrikaziSveClanove;
+    private javax.swing.JButton jbtPronadjiOrganizaciju;
+    private javax.swing.JLabel jlKriterijumiKursa;
+    private javax.swing.JLabel jlUnesiteKriterijumPretrageKursa;
+    private javax.swing.JTable jtblTabelaOrganizacija;
+    private javax.swing.JTextField jtfKriterijumPretrage;
     // End of variables declaration//GEN-END:variables
 }
