@@ -14,6 +14,7 @@ import forme.organizacija.FrmUnosOrganizacije;
 import forme.zivotinja.FrmAzuriranjeZivotinje;
 import forme.zivotinja.FrmBrisanjeZivotinje;
 import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
@@ -30,6 +31,7 @@ public class FrmGlavna extends javax.swing.JFrame {
 
     public FrmGlavna() {
         initComponents();
+        postaviIkonicu();
     }
 
     /**
@@ -276,6 +278,11 @@ public class FrmGlavna extends javax.swing.JFrame {
         aktivniPanel = panel;
         getContentPane().repaint();
         getContentPane().validate();
+    }
+
+    private void postaviIkonicu() {
+        ImageIcon img = new ImageIcon("dog.png");
+        setIconImage(img.getImage());
     }
 
 }
