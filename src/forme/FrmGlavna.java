@@ -77,7 +77,7 @@ public class FrmGlavna extends javax.swing.JFrame {
         jpPanel.setMinimumSize(new java.awt.Dimension(630, 760));
         jpPanel.setPreferredSize(new java.awt.Dimension(630, 760));
         jpPanel.setLayout(new java.awt.GridLayout(1, 0));
-        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 630, 410));
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 630, 510));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));

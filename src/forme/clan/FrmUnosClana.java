@@ -5,6 +5,17 @@
  */
 package forme.clan;
 
+import domen.Organizacija;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import transfer.TransferObjekatOdgovor;
+import transfer.TransferObjekatZahtev;
+import util.Konstante;
+
 /**
  *
  * @author Ivana
@@ -16,6 +27,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
      */
     public FrmUnosClana() {
         initComponents();
+        inicijalizujKomboBoks();
     }
 
     /**
@@ -255,4 +267,25 @@ public class FrmUnosClana extends javax.swing.JPanel {
     private javax.swing.JTextField jtfJmbg;
     private javax.swing.JTextField jtfPrezime;
     // End of variables declaration//GEN-END:variables
+
+    private void inicijalizujKomboBoks() {
+
+        try {
+            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            TransferObjekatOdgovor toOdgovor =  Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Organizacija> lista = (List<Organizacija>) toOdgovor.getRezultat();
+            for (Organizacija o : lista) {
+                jcbOrganizacija.addItem(o);
+            }
+            System.out.println(toOdgovor.getOdgovor().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    }
 }
