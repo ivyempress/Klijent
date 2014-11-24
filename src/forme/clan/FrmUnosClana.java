@@ -5,6 +5,7 @@
  */
 package forme.clan;
 
+import domen.Grad;
 import domen.Organizacija;
 import java.io.IOException;
 import java.util.List;
@@ -275,12 +276,25 @@ public class FrmUnosClana extends javax.swing.JPanel {
             toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
             TransferObjekatOdgovor toOdgovor =  Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Organizacija> lista = (List<Organizacija>) toOdgovor.getRezultat();
-            for (Organizacija o : lista) {
+            List<Organizacija> listaOrganizacija = (List<Organizacija>) toOdgovor.getRezultat();
+            for (Organizacija o : listaOrganizacija) {
                 jcbOrganizacija.addItem(o);
             }
             
             System.out.println(toOdgovor.getOdgovor().toString());
+            
+            
+            toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.VRATI_SVE_GRADOVE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            toOdgovor =  Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Grad> listaGradova = (List<Grad>) toOdgovor.getRezultat();
+            for (Grad g : listaGradova) {
+                jcbOrganizacija.addItem(g);
+            }
+            
+            System.out.println(toOdgovor.getOdgovor().toString());
+            
         } catch (IOException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
