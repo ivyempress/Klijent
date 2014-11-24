@@ -290,7 +290,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
             toOdgovor =  Komunikacija.vratiObjekat().procitajOdgovor();
             List<Grad> listaGradova = (List<Grad>) toOdgovor.getRezultat();
             for (Grad g : listaGradova) {
-                jcbOrganizacija.addItem(g);
+                jcbGrad.addItem(g);
             }
             
             System.out.println(toOdgovor.getOdgovor().toString());
