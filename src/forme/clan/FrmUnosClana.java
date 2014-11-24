@@ -279,6 +279,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
             for (Organizacija o : lista) {
                 jcbOrganizacija.addItem(o);
             }
+            
             System.out.println(toOdgovor.getOdgovor().toString());
         } catch (IOException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
