@@ -5,6 +5,19 @@
  */
 package forme.organizacija;
 
+import domen.Organizacija;
+import java.awt.Component;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import transfer.TransferObjekatOdgovor;
+import transfer.TransferObjekatZahtev;
+import util.Konstante;
+
 /**
  *
  * @author Ivana
@@ -16,7 +29,8 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
      */
     public FrmAzuriranjeOrganizacije() {
         initComponents();
-      //  popuniKomboBoks();
+        popuniKomboBoks();
+        formatirajPolja(false);
     }
 
     /**
@@ -42,14 +56,21 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
         jbtSacuvaj = new javax.swing.JButton();
         jbtPonisti = new javax.swing.JButton();
         jdcDatumOsnivanja = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        jtfOrganizacijaID = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje organizacije", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
         setMinimumSize(new java.awt.Dimension(100, 100));
         setName(""); // NOI18N
 
-        jLabel1.setText("Lista organizacija:");
+        jLabel1.setText("Izaberite organizaciju:");
 
         jcbListaOrganizacija.setBackground(new java.awt.Color(255, 0, 255));
+        jcbListaOrganizacija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbListaOrganizacijaActionPerformed(evt);
+            }
+        });
 
         jpUnosOrganizacije.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
 
@@ -72,8 +93,15 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtfOpisDelatnosti);
 
         jbtSacuvaj.setText("Sačuvaj promene");
+        jbtSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtSacuvajActionPerformed(evt);
+            }
+        });
 
         jbtPonisti.setText("Poništi promene");
+
+        jLabel6.setText("Id organizacije :");
 
         javax.swing.GroupLayout jpUnosOrganizacijeLayout = new javax.swing.GroupLayout(jpUnosOrganizacije);
         jpUnosOrganizacije.setLayout(jpUnosOrganizacijeLayout);
@@ -81,51 +109,56 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
             jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpUnosOrganizacijeLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpUnosOrganizacijeLayout.createSequentialGroup()
                         .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfImeOsnivaca)
                             .addComponent(jtfNazivOrganizacije)
                             .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
-                        .addContainerGap(29, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(jtfOrganizacijaID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpUnosOrganizacijeLayout.createSequentialGroup()
                         .addComponent(jbtSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
+                        .addGap(50, 50, 50)
+                        .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jpUnosOrganizacijeLayout.setVerticalGroup(
             jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpUnosOrganizacijeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtfNazivOrganizacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtfOrganizacijaID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtfNazivOrganizacije, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfImeOsnivaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jdcDatumOsnivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jpUnosOrganizacijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtPonisti)
-                    .addComponent(jbtSacuvaj))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbtSacuvaj)
+                    .addComponent(jbtPonisti))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -151,13 +184,39 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                     .addComponent(jcbListaOrganizacija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jpUnosOrganizacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfImeOsnivacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfImeOsnivacaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfImeOsnivacaActionPerformed
+
+    private void jcbListaOrganizacijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListaOrganizacijaActionPerformed
+        popuniPolja();
+    }//GEN-LAST:event_jcbListaOrganizacijaActionPerformed
+
+    private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
+        try {
+            Organizacija o = new Organizacija();
+            o.setOrganizacijaID(Integer.parseInt(jtfOrganizacijaID.getText()));
+            o.setImeOsnivaca(jtfImeOsnivaca.getText());
+            o.setNazivOrganizacije(jtfNazivOrganizacije.getText().trim());
+            o.setOpisDelatnosti(jtfOpisDelatnosti.getText());
+            o.setDatumOsnivanja(jdcDatumOsnivanja.getDate());
+            TransferObjekatZahtev toz = new TransferObjekatZahtev();
+            toz.setOperacija(Konstante.IZMENI_ORGANIZACIJU);
+            toz.setParametar(o);
+            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            JOptionPane.showMessageDialog(jpUnosOrganizacije, "Uspesno ste izmenili organizaciju", "Izmena organizacije", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(""+too.getOdgovor());
+        } catch (IOException ex) {
+            Logger.getLogger(FrmAzuriranjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmAzuriranjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtSacuvajActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -166,6 +225,7 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtPonisti;
     private javax.swing.JButton jbtSacuvaj;
@@ -175,7 +235,40 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
     private javax.swing.JTextField jtfImeOsnivaca;
     private javax.swing.JTextField jtfNazivOrganizacije;
     private javax.swing.JTextArea jtfOpisDelatnosti;
+    private javax.swing.JTextField jtfOrganizacijaID;
     // End of variables declaration//GEN-END:variables
 
-   
+    private void popuniKomboBoks() {
+        try {
+            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
+            jcbListaOrganizacija.setModel(new DefaultComboBoxModel(listaOrganizacija.toArray()));
+        } catch (IOException ex) {
+            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void popuniPolja() {
+        formatirajPolja(true);
+        jtfOrganizacijaID.setEnabled(false);
+        Organizacija o = (Organizacija) jcbListaOrganizacija.getSelectedItem();
+        jtfOrganizacijaID.setText(String.valueOf(o.getOrganizacijaID()));
+        jtfNazivOrganizacije.setText(o.getNazivOrganizacije());
+        jtfImeOsnivaca.setText(o.getImeOsnivaca());
+        jdcDatumOsnivanja.setDate(o.getDatumOsnivanja());
+        jtfOpisDelatnosti.setText(o.getOpisDelatnosti());
+    }
+
+    private void formatirajPolja(Boolean b) {
+        for (Component c : jpUnosOrganizacije.getComponents()) {
+            c.setEnabled(b);
+        }
+        jtfOpisDelatnosti.setEnabled(b);
+    }
+
 }

@@ -33,7 +33,7 @@ public class FrmGlavna extends javax.swing.JFrame {
     
     public FrmGlavna() {
         initComponents();
-        postaviIkonicu();
+        postaviImeIIkonicu();
     }
 
     /**
@@ -284,7 +284,8 @@ public class FrmGlavna extends javax.swing.JFrame {
         getContentPane().validate();
     }
     
-    private void postaviIkonicu() {
+    private void postaviImeIIkonicu() {
+        setTitle("Ivana Lukic");
         ImageIcon img = new ImageIcon("dog.png");
         setIconImage(img.getImage());
     }
