@@ -156,7 +156,7 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
     private void jbtPronadjiOrganizacijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPronadjiOrganizacijuActionPerformed
         try {
             if (jtfKriterijumPretrage.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(jScrollPane1, "Morate uneti kriterijum za pretragu", "Pretraga", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(jScrollPane1, "Morate uneti kriterijum za pretragu", "Pretraga", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             String kriterijum = jtfKriterijumPretrage.getText().trim();
@@ -198,7 +198,7 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
         int col = jtblTabelaOrganizacija.columnAtPoint(evt.getPoint());
         if (col == 4) {
             String opis = (String) jtblTabelaOrganizacija.getModel().getValueAt(row, col);
-            JOptionPane.showMessageDialog(this, opis, "Opis kursa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, opis, "Opis organizacije", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jtblTabelaOrganizacijaMouseClicked
 

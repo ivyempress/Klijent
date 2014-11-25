@@ -140,7 +140,7 @@ public class FrmBrisanjeClana extends javax.swing.JPanel {
         int col = jtblTabelaOrganizacija.columnAtPoint(evt.getPoint());
         if ( col == 2) {
             String opis = (String) jtblTabelaOrganizacija.getModel().getValueAt(row, col);
-            JOptionPane.showMessageDialog(this, opis, "Opis kursa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, opis, "Opis organizacije", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jtblTabelaOrganizacijaMouseClicked
 

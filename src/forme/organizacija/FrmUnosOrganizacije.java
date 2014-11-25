@@ -5,6 +5,16 @@
  */
 package forme.organizacija;
 
+import domen.Organizacija;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import transfer.TransferObjekatOdgovor;
+import transfer.TransferObjekatZahtev;
+import util.Konstante;
+
 /**
  *
  * @author Ivana
@@ -65,8 +75,18 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
         });
 
         jbtSacuvaj.setText("Sačuvaj organizaciju");
+        jbtSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtSacuvajActionPerformed(evt);
+            }
+        });
 
         jbtPonisti.setText("Poništi unos");
+        jbtPonisti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPonistiActionPerformed(evt);
+            }
+        });
 
         jtaOpisDelatnosti.setColumns(20);
         jtaOpisDelatnosti.setRows(5);
@@ -124,6 +144,45 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
     private void jtfImeOsnivacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfImeOsnivacaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfImeOsnivacaActionPerformed
+
+    private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
+        try {
+            //postavljanje ID organizacije
+            if (jtfNazivOrganizacije.getText().isEmpty() || jtfImeOsnivaca.getText().isEmpty() || jtaOpisDelatnosti.getText().isEmpty()) {
+                 JOptionPane.showMessageDialog(jScrollPane2, "Niste uneli sva polja na formi ", "Cuvanje organizacije", JOptionPane.WARNING_MESSAGE);
+                 return;
+            }
+            TransferObjekatZahtev toz = new TransferObjekatZahtev();
+            toz.setOperacija(Konstante.VRATI_ID_ORGANIZACIJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            int organizacijaID = (int) too.getRezultat();
+            System.out.println("ID nove organizacije je : "+organizacijaID);
+            //cuvanje Organizacije
+            Organizacija o = new Organizacija();
+            o.setOrganizacijaID(organizacijaID);
+            o.setNazivOrganizacije(jtfNazivOrganizacije.getText().trim());
+            o.setImeOsnivaca(jtfImeOsnivaca.getText().trim());
+            o.setDatumOsnivanja(jdcDatumOsnivanja.getDate());
+            o.setOpisDelatnosti(jtaOpisDelatnosti.getText());
+            toz.setOperacija(Konstante.SACUVAJ_ORGANIZACIJU);
+            toz.setParametar(o);
+            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+            too = Komunikacija.vratiObjekat().procitajOdgovor();
+            System.out.println(""+too.getOdgovor());
+            JOptionPane.showMessageDialog(jScrollPane2, "Uspesno je sacuvana organizacija "+o.getNazivOrganizacije()+" , ID="+o.getOrganizacijaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(FrmUnosOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmUnosOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtSacuvajActionPerformed
+
+    private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
+        
+    }//GEN-LAST:event_jbtPonistiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
