@@ -5,7 +5,16 @@
  */
 package forme.organizacija;
 
+import domen.Organizacija;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import transfer.TransferObjekatOdgovor;
+import transfer.TransferObjekatZahtev;
+import util.Konstante;
 
 /**
  *
@@ -52,7 +61,7 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
         });
 
         jlKriterijumiKursa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jlKriterijumiKursa.setText("naziv");
+        jlKriterijumiKursa.setText("naziv/osnivac");
 
         jbtPronadjiOrganizaciju.setText("Pronađi");
         jbtPronadjiOrganizaciju.addActionListener(new java.awt.event.ActionListener() {
@@ -68,17 +77,19 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
             }
         });
 
+        jtblTabelaOrganizacija.setBackground(new java.awt.Color(220, 220, 122));
         jtblTabelaOrganizacija.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        jtblTabelaOrganizacija.setToolTipText("");
         jtblTabelaOrganizacija.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblTabelaOrganizacijaMouseClicked(evt);
@@ -91,7 +102,7 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
+                .addContainerGap(356, Short.MAX_VALUE)
                 .addComponent(jbtObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,18 +154,49 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfKriterijumPretrageActionPerformed
 
     private void jbtPronadjiOrganizacijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPronadjiOrganizacijuActionPerformed
+        try {
+            if (jtfKriterijumPretrage.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(jScrollPane1, "Morate uneti kriterijum za pretragu", "Pretraga", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            String kriterijum = jtfKriterijumPretrage.getText().trim();
+            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.PRETRAZI_ORGANIZACIJE);
+            toZahtev.setParametar(kriterijum);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Organizacija> listaOrg = (List<Organizacija>) too.getRezultat();
+            jtblTabelaOrganizacija.setModel(new ModelTabeleOrganizacija(listaOrg));
+        } catch (IOException ex) {
+            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }//GEN-LAST:event_jbtPronadjiOrganizacijuActionPerformed
 
     private void jbtPrikaziSveOrganiyacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPrikaziSveOrganiyacijeActionPerformed
-       
+        try {
+            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
+            jtblTabelaOrganizacija.setModel(new ModelTabeleOrganizacija(listaOrganizacija));
+        } catch (IOException ex) {
+            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jbtPrikaziSveOrganiyacijeActionPerformed
 
     private void jtblTabelaOrganizacijaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblTabelaOrganizacijaMouseClicked
         // TODO add your handling code here:
         int row = jtblTabelaOrganizacija.rowAtPoint(evt.getPoint());
         int col = jtblTabelaOrganizacija.columnAtPoint(evt.getPoint());
-        if ( col == 2) {
+        if (col == 4) {
             String opis = (String) jtblTabelaOrganizacija.getModel().getValueAt(row, col);
             JOptionPane.showMessageDialog(this, opis, "Opis kursa", JOptionPane.INFORMATION_MESSAGE);
         }

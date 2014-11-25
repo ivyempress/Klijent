@@ -15,6 +15,7 @@ import forme.organizacija.FrmUnosOrganizacije;
 import forme.zivotinja.FrmAzuriranjeZivotinje;
 import forme.zivotinja.FrmBrisanjeZivotinje;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
