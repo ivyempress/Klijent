@@ -50,6 +50,11 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Brisanje organizacije", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
         jbtObrisi.setText("Obriši organizaciju");
+        jbtObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtObrisiActionPerformed(evt);
+            }
+        });
 
         jlUnesiteKriterijumPretrageKursa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jlUnesiteKriterijumPretrageKursa.setText("Unesite kriterijum pretrage :");
@@ -172,8 +177,8 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jbtPronadjiOrganizacijuActionPerformed
 
     private void jbtPrikaziSveOrganiyacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPrikaziSveOrganiyacijeActionPerformed
@@ -201,6 +206,32 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, opis, "Opis organizacije", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jtblTabelaOrganizacijaMouseClicked
+
+    private void jbtObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtObrisiActionPerformed
+        int izabraniRed = jtblTabelaOrganizacija.getSelectedRow();
+        if (izabraniRed == -1) {
+            JOptionPane.showConfirmDialog(jtblTabelaOrganizacija, "Niste obelezili koju organizaciju zelite da obrisete", "Brisanje organizacije", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            try {
+                ModelTabeleOrganizacija modelTabeleOrganizacija = (ModelTabeleOrganizacija) jtblTabelaOrganizacija.getModel();
+                Organizacija o = modelTabeleOrganizacija.vratiOrganizaciju(izabraniRed);
+                TransferObjekatZahtev toz = new TransferObjekatZahtev();
+                toz.setOperacija(Konstante.OBRISI_ORGANIZACIJU);
+                toz.setParametar(o);
+                Komunikacija.vratiObjekat().posaljiZahtev(toz);
+                TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+                JOptionPane.showMessageDialog(jtblTabelaOrganizacija, ""+too.getOdgovor()+" : "+o.getNazivOrganizacije(), "Brisanje organizacije", JOptionPane.INFORMATION_MESSAGE);
+                modelTabeleOrganizacija.obrisiOrganizaciju(izabraniRed);
+            } catch (IOException ex) {
+                Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         
+        }
+
+    }//GEN-LAST:event_jbtObrisiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

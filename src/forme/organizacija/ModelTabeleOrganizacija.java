@@ -8,11 +8,19 @@ import javax.swing.table.AbstractTableModel;
 public class ModelTabeleOrganizacija extends AbstractTableModel {
 
     private List<Organizacija> listaOrganizacija;
+    String[] naziviKolona = {"ID", "Naziv", "Osnivac", "Osnovan", "Opis"};
 
     public ModelTabeleOrganizacija(List<Organizacija> listaOrganizacija) {
         this.listaOrganizacija = listaOrganizacija;
     }
-    String[] naziviKolona = {"ID", "Naziv", "Osnivac", "Osnovan", "Opis"};
+
+    public Organizacija vratiOrganizaciju(int i) {
+        return listaOrganizacija.get(i);
+    }
+    public void obrisiOrganizaciju(int i){
+        listaOrganizacija.remove(i);
+        fireTableDataChanged();
+    }
 
     @Override
     public int getRowCount() {
