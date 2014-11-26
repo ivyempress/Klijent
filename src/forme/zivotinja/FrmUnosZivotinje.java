@@ -108,6 +108,12 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
 
     private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
         try {
+            
+             if (jtfNazivZivotinje.getText().isEmpty() || jtaOpisZivotinje.getText().isEmpty()) {
+                 JOptionPane.showMessageDialog(jScrollPane1, "Niste uneli sva polja na formi ", "Cuvanje zivotinje", JOptionPane.WARNING_MESSAGE);
+                 return;
+            }
+            
             TransferObjekatZahtev toz = new TransferObjekatZahtev();
             toz.setOperacija(Konstante.VRATI_ID_ZIVOTINJE);
             Komunikacija.vratiObjekat().posaljiZahtev(toz);
@@ -125,7 +131,7 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
             Komunikacija.vratiObjekat().posaljiZahtev(toz);
             too = Komunikacija.vratiObjekat().procitajOdgovor();
             System.out.println(""+too.getOdgovor());
-            JOptionPane.showMessageDialog(this, "Uspesno je sacuvana zivotinja "+z.getNaziv()+" , ID="+z.getZivotinjaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(jScrollPane1, "Uspesno je sacuvana zivotinja "+z.getNaziv()+" , ID="+z.getZivotinjaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);
             
         
 // TODO add your handling code here:
