@@ -5,6 +5,16 @@
  */
 package forme.zivotinja;
 
+import domen.Zivotinja;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import transfer.TransferObjekatOdgovor;
+import transfer.TransferObjekatZahtev;
+import util.Konstante;
+
 /**
  *
  * @author Ivana
@@ -29,8 +39,8 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jtfNazivZivotinje = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtSacuvaj = new javax.swing.JButton();
+        jbtPonisti = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaOpisZivotinje = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -39,9 +49,14 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
 
         jLabel1.setText("Naziv životinje:");
 
-        jButton1.setText("Sačuvaj životinju");
+        jbtSacuvaj.setText("Sačuvaj životinju");
+        jbtSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtSacuvajActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Poništi unos");
+        jbtPonisti.setText("Poništi unos");
 
         jtaOpisZivotinje.setColumns(20);
         jtaOpisZivotinje.setRows(5);
@@ -67,9 +82,9 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfNazivZivotinje, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jbtSacuvaj)
                         .addGap(68, 68, 68)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,19 +100,49 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jbtSacuvaj)
+                    .addComponent(jbtPonisti))
                 .addGap(56, 56, 56))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
+        try {
+            TransferObjekatZahtev toz = new TransferObjekatZahtev();
+            toz.setOperacija(Konstante.VRATI_ID_ZIVOTINJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            int zivotinjaID = (int) too.getRezultat();
+            System.out.println("ID nove zivotinje je : "+zivotinjaID);
+            
+            Zivotinja z = new Zivotinja();
+            z.setZivotinjaID(zivotinjaID);
+            z.setNaziv(jtfNazivZivotinje.getText());
+            z.setOpisVrste(jtaOpisZivotinje.getText());
+            
+            toz.setOperacija(Konstante.SACUVAJ_ZIVOTINJU);
+            toz.setParametar(z);
+            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+            too = Komunikacija.vratiObjekat().procitajOdgovor();
+            System.out.println(""+too.getOdgovor());
+            JOptionPane.showMessageDialog(this, "Uspesno je sacuvana zivotinja "+z.getNaziv()+" , ID="+z.getZivotinjaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);
+            
+        
+// TODO add your handling code here:
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmUnosZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmUnosZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtSacuvajActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtPonisti;
+    private javax.swing.JButton jbtSacuvaj;
     private javax.swing.JTextArea jtaOpisZivotinje;
     private javax.swing.JTextField jtfNazivZivotinje;
     // End of variables declaration//GEN-END:variables

@@ -14,6 +14,7 @@ import forme.organizacija.FrmBrisanjeOrganizacije;
 import forme.organizacija.FrmUnosOrganizacije;
 import forme.zivotinja.FrmAzuriranjeZivotinje;
 import forme.zivotinja.FrmBrisanjeZivotinje;
+import forme.zivotinja.FrmUnosZivotinje;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.ImageIcon;
@@ -206,8 +207,8 @@ public class FrmGlavna extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiBrisanjeClanaActionPerformed
 
     private void jmiDodavanjeZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDodavanjeZivotinjeActionPerformed
-        FrmUnosOrganizacije fuo = new FrmUnosOrganizacije();
-        postaviAktivniPanel(fuo);
+        FrmUnosZivotinje fuz = new FrmUnosZivotinje();
+        postaviAktivniPanel(fuz);
     }//GEN-LAST:event_jmiDodavanjeZivotinjeActionPerformed
 
     private void jmiAzuriranjeZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAzuriranjeZivotinjeActionPerformed
