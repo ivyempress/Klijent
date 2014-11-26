@@ -131,8 +131,7 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
             Komunikacija.vratiObjekat().posaljiZahtev(toz);
             too = Komunikacija.vratiObjekat().procitajOdgovor();
             System.out.println(""+too.getOdgovor());
-            JOptionPane.showMessageDialog(jScrollPane1, "Uspesno je sacuvana zivotinja "+z.getNaziv()+" , ID="+z.getZivotinjaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);
-            
+            JOptionPane.showMessageDialog(jScrollPane1, "Uspesno je sacuvana zivotinja "+z.getNaziv()+" , ID="+z.getZivotinjaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);    
         
 // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
