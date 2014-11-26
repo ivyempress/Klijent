@@ -28,7 +28,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
      */
     Clan clan;
     List<Ljubimac> listaLjubimaca = new ArrayList<>();
-    
+
     public FrmUnosClana() {
         initComponents();
         inicijalizujKomboBoks();
@@ -272,7 +272,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
             ljub.setVlasnik(clan);
         }
         clan.setListaLjubimaca(listaLjubimaca);
-        
+
         try {
             TransferObjekatZahtev toz = new TransferObjekatZahtev();
             toz.setOperacija(Konstante.SACUVAJ_CLANA);
@@ -281,6 +281,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
             TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
             JOptionPane.showMessageDialog(jpLjubimac, too.getOdgovor() + ": " + clan.getIme() + " " + clan.getPrezime(), "Cuvanje clana", JOptionPane.INFORMATION_MESSAGE);
             listaLjubimaca = new ArrayList<>();
+            ocistiFormu();
         } catch (IOException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -302,7 +303,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
         ljubimac.setLjubimacID(listaLjubimaca.size() + 1);
         listaLjubimaca.add(ljubimac);
         JOptionPane.showMessageDialog(jpLjubimac, "Uspesno ste uneli ljubimca : " + ljubimac.getImeLjubimca(), imeLjubimca, WIDTH);
-        
+
     }//GEN-LAST:event_jbtDodajLjubimcaActionPerformed
 
 
@@ -334,7 +335,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void inicijalizujKomboBoks() {
-        
+
         try {
             TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
@@ -344,9 +345,9 @@ public class FrmUnosClana extends javax.swing.JPanel {
             for (Organizacija o : listaOrganizacija) {
                 jcbOrganizacija.addItem(o);
             }
-            
+
             System.out.println(toOdgovor.getOdgovor());
-            
+
             toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_GRADOVE);
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
@@ -355,7 +356,9 @@ public class FrmUnosClana extends javax.swing.JPanel {
             for (Grad g : listaGradova) {
                 jcbGrad.addItem(g);
             }
-            
+
+            System.out.println(toOdgovor.getOdgovor());
+
             toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_ZIVOTINJE);
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
@@ -364,14 +367,24 @@ public class FrmUnosClana extends javax.swing.JPanel {
             for (Zivotinja z : listaZivotinja) {
                 jcbZivotinja.addItem(z);
             }
-            
+
             System.out.println(toOdgovor.getOdgovor());
-            
+
         } catch (IOException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+
+    private void ocistiFormu() {
+        jtfJmbg.setText("");
+        jtfIme.setText("");
+        jtfPrezime.setText("");
+        jdcDatumRodjenja.setDate(null);
+        jdcDatumSpasavanjaLjubimca.setDate(null);
+        jdcDatumUclanjenja.setDate(null);
+
     }
 }
