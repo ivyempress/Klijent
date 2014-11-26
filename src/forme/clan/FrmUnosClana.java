@@ -7,7 +7,9 @@ package forme.clan;
 
 import domen.Grad;
 import domen.Organizacija;
+import domen.Zivotinja;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -147,6 +149,11 @@ public class FrmUnosClana extends javax.swing.JPanel {
         );
 
         jbtSacuvaj.setText("Sačuvaj novog člana");
+        jbtSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtSacuvajActionPerformed(evt);
+            }
+        });
 
         jbtPonisti.setText("Poništi unos");
 
@@ -158,35 +165,34 @@ public class FrmUnosClana extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jpLjubimac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jtfJmbg))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jtfIme, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel3)
-                            .addGap(10, 10, 10)
-                            .addComponent(jtfPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel5)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel6))
-                            .addGap(28, 28, 28)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jdcDatumUclanjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbOrganizacija, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jdcDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbGrad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jbtSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                            .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfJmbg))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfIme, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addGap(10, 10, 10)
+                        .addComponent(jtfPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jdcDatumUclanjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbOrganizacija, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jdcDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcbGrad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jbtSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -241,6 +247,14 @@ public class FrmUnosClana extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbZivotinjaActionPerformed
 
+    private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
+        Date datumRodjenja = jdcDatumRodjenja.getDate();
+        Date datumUclanjenja = jdcDatumUclanjenja.getDate();
+        if (jtfJmbg.getText().isEmpty() || jtfIme.getText().isEmpty() || jtfPrezime.getText().isEmpty() || datumRodjenja == null || datumUclanjenja == null) {
+            JOptionPane.showMessageDialog(jpLjubimac, "Morate uneti sva polja na formi", "Cuvanje clana", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jbtSacuvajActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -275,32 +289,39 @@ public class FrmUnosClana extends javax.swing.JPanel {
             TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor toOdgovor =  Komunikacija.vratiObjekat().procitajOdgovor();
+            TransferObjekatOdgovor toOdgovor = Komunikacija.vratiObjekat().procitajOdgovor();
             List<Organizacija> listaOrganizacija = (List<Organizacija>) toOdgovor.getRezultat();
             for (Organizacija o : listaOrganizacija) {
                 jcbOrganizacija.addItem(o);
             }
-            
-            System.out.println(toOdgovor.getOdgovor().toString());
-            
-            
+
+            System.out.println(toOdgovor.getOdgovor());
+
             toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_GRADOVE);
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            toOdgovor =  Komunikacija.vratiObjekat().procitajOdgovor();
+            toOdgovor = Komunikacija.vratiObjekat().procitajOdgovor();
             List<Grad> listaGradova = (List<Grad>) toOdgovor.getRezultat();
             for (Grad g : listaGradova) {
                 jcbGrad.addItem(g);
             }
             
-            System.out.println(toOdgovor.getOdgovor().toString());
-            
+            toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.VRATI_SVE_ZIVOTINJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            toOdgovor = Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Zivotinja> listaZivotinja = (List<Zivotinja>) toOdgovor.getRezultat();
+            for (Zivotinja z : listaZivotinja) {
+                jcbZivotinja.addItem(z);
+            }
+
+            System.out.println(toOdgovor.getOdgovor());
+
         } catch (IOException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    
+
     }
 }

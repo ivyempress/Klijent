@@ -7,6 +7,7 @@ package forme.organizacija;
 
 import domen.Organizacija;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -148,7 +149,8 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
     private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
         try {
             //postavljanje ID organizacije
-            if (jtfNazivOrganizacije.getText().isEmpty() || jtfImeOsnivaca.getText().isEmpty() || jtaOpisDelatnosti.getText().isEmpty()) {
+            Date datumOsnivanja = jdcDatumOsnivanja.getDate();
+            if (jtfNazivOrganizacije.getText().isEmpty() || jtfImeOsnivaca.getText().isEmpty() || jtaOpisDelatnosti.getText().isEmpty()|| datumOsnivanja == null) {
                  JOptionPane.showMessageDialog(jScrollPane2, "Niste uneli sva polja na formi ", "Cuvanje organizacije", JOptionPane.WARNING_MESSAGE);
                  return;
             }
@@ -156,6 +158,7 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
             toz.setOperacija(Konstante.VRATI_ID_ORGANIZACIJE);
             Komunikacija.vratiObjekat().posaljiZahtev(toz);
             TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            System.out.println(""+too.getRezultat());
             int organizacijaID = (int) too.getRezultat();
             System.out.println("ID nove organizacije je : "+organizacijaID);
             //cuvanje Organizacije
@@ -163,7 +166,7 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
             o.setOrganizacijaID(organizacijaID);
             o.setNazivOrganizacije(jtfNazivOrganizacije.getText().trim());
             o.setImeOsnivaca(jtfImeOsnivaca.getText().trim());
-            o.setDatumOsnivanja(jdcDatumOsnivanja.getDate());
+            o.setDatumOsnivanja(datumOsnivanja);
             o.setOpisDelatnosti(jtaOpisDelatnosti.getText());
             toz.setOperacija(Konstante.SACUVAJ_ORGANIZACIJU);
             toz.setParametar(o);
