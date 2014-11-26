@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package forme.clan;
 
+import domen.Clan;
 import domen.Grad;
+import domen.Ljubimac;
 import domen.Organizacija;
 import domen.Zivotinja;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,6 +26,9 @@ public class FrmUnosClana extends javax.swing.JPanel {
     /**
      * Creates new form FrmBrisanjeClana
      */
+    Clan clan;
+    List<Ljubimac> listaLjubimaca = new ArrayList<>();
+    
     public FrmUnosClana() {
         initComponents();
         inicijalizujKomboBoks();
@@ -105,6 +106,11 @@ public class FrmUnosClana extends javax.swing.JPanel {
         jLabel11.setText("Datum spašavanja:");
 
         jbtDodajLjubimca.setText("Dodaj novog ljubimca");
+        jbtDodajLjubimca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtDodajLjubimcaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpLjubimacLayout = new javax.swing.GroupLayout(jpLjubimac);
         jpLjubimac.setLayout(jpLjubimacLayout);
@@ -252,8 +258,52 @@ public class FrmUnosClana extends javax.swing.JPanel {
         Date datumUclanjenja = jdcDatumUclanjenja.getDate();
         if (jtfJmbg.getText().isEmpty() || jtfIme.getText().isEmpty() || jtfPrezime.getText().isEmpty() || datumRodjenja == null || datumUclanjenja == null) {
             JOptionPane.showMessageDialog(jpLjubimac, "Morate uneti sva polja na formi", "Cuvanje clana", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        clan = new Clan();
+        clan.setJmbg(jtfJmbg.getText().trim());
+        clan.setIme(jtfIme.getText().trim());
+        clan.setPrezime(jtfPrezime.getText().trim());
+        clan.setDatumRodjenja(datumRodjenja);
+        clan.setDatumUclanjenja(datumUclanjenja);
+        clan.setOrganizacija((Organizacija) jcbOrganizacija.getSelectedItem());
+        clan.setDrzava((Grad) jcbGrad.getSelectedItem());
+        for (Ljubimac ljub : listaLjubimaca) {
+            ljub.setVlasnik(clan);
+        }
+        clan.setListaLjubimaca(listaLjubimaca);
+        
+        try {
+            TransferObjekatZahtev toz = new TransferObjekatZahtev();
+            toz.setOperacija(Konstante.SACUVAJ_CLANA);
+            toz.setParametar(clan);
+            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            JOptionPane.showMessageDialog(jpLjubimac, too.getOdgovor() + ": " + clan.getIme() + " " + clan.getPrezime(), "Cuvanje clana", JOptionPane.INFORMATION_MESSAGE);
+            listaLjubimaca = new ArrayList<>();
+        } catch (IOException ex) {
+            Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtSacuvajActionPerformed
+
+    private void jbtDodajLjubimcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDodajLjubimcaActionPerformed
+        Date datumSpasavanjaLjubimca = jdcDatumSpasavanjaLjubimca.getDate();
+        if (jtfImeLjubimca.getText().isEmpty() || datumSpasavanjaLjubimca == null) {
+            JOptionPane.showMessageDialog(jpLjubimac, "Morate uneti sva polja na formi da bi dodali ljubmica", "Dodavanje ljubmica", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String imeLjubimca = jtfImeLjubimca.getText().trim();
+        Ljubimac ljubimac = new Ljubimac();
+        ljubimac.setImeLjubimca(imeLjubimca);
+        ljubimac.setDatumSpasavanja(datumSpasavanjaLjubimca);
+        ljubimac.setVrstaZivotinje((Zivotinja) jcbZivotinja.getSelectedItem());
+        ljubimac.setLjubimacID(listaLjubimaca.size() + 1);
+        listaLjubimaca.add(ljubimac);
+        JOptionPane.showMessageDialog(jpLjubimac, "Uspesno ste uneli ljubimca : " + ljubimac.getImeLjubimca(), imeLjubimca, WIDTH);
+        
+    }//GEN-LAST:event_jbtDodajLjubimcaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -284,7 +334,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void inicijalizujKomboBoks() {
-
+        
         try {
             TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
@@ -294,9 +344,9 @@ public class FrmUnosClana extends javax.swing.JPanel {
             for (Organizacija o : listaOrganizacija) {
                 jcbOrganizacija.addItem(o);
             }
-
+            
             System.out.println(toOdgovor.getOdgovor());
-
+            
             toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_GRADOVE);
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
@@ -314,14 +364,14 @@ public class FrmUnosClana extends javax.swing.JPanel {
             for (Zivotinja z : listaZivotinja) {
                 jcbZivotinja.addItem(z);
             }
-
+            
             System.out.println(toOdgovor.getOdgovor());
-
+            
         } catch (IOException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FrmUnosClana.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 }
