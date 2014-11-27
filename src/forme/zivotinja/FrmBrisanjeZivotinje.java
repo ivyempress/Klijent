@@ -5,7 +5,16 @@
  */
 package forme.zivotinja;
 
+import domen.Zivotinja;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import transfer.TransferObjekatOdgovor;
+import transfer.TransferObjekatZahtev;
+import util.Konstante;
 
 /**
  *
@@ -56,13 +65,10 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
 
         jtblTabelaZivotinja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jtblTabelaZivotinja.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,9 +79,14 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtblTabelaZivotinja);
 
         jlKriterijumiKursa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jlKriterijumiKursa.setText("naziv");
+        jlKriterijumiKursa.setText("naziv/opis");
 
         jbtObrisi.setText("Obriši životinju");
+        jbtObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtObrisiActionPerformed(evt);
+            }
+        });
 
         jtfKriterijumPretrage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,11 +145,40 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtPronadjiYivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPronadjiYivotinjeActionPerformed
+ try {
+            if (jtfKriterijumPretrage.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(jScrollPane1, "Morate uneti kriterijum za pretragu", "Pretraga", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            String kriterijum = jtfKriterijumPretrage.getText().trim();
+            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.PRETRAZI_ZIVOTINJE);
+            toZahtev.setParametar(kriterijum);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Zivotinja> listaZivotinja = (List<Zivotinja>) too.getRezultat();
+            jtblTabelaZivotinja.setModel(new ModelTabeleZivotinja(listaZivotinja));
+        } catch (IOException ex) {
+            Logger.getLogger(FrmBrisanjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmBrisanjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jbtPronadjiYivotinjeActionPerformed
 
     private void jbtPrikaziSveZivotinjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPrikaziSveZivotinjeActionPerformed
-
+try {
+            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.VRATI_SVE_ZIVOTINJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Zivotinja> listaZivotinja = (List<Zivotinja>) too.getRezultat();
+            jtblTabelaZivotinja.setModel(new ModelTabeleZivotinja(listaZivotinja));
+        } catch (IOException ex) {
+            Logger.getLogger(FrmBrisanjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmBrisanjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbtPrikaziSveZivotinjeActionPerformed
 
     private void jtblTabelaZivotinjaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblTabelaZivotinjaMouseClicked
@@ -147,13 +187,38 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
         int col = jtblTabelaZivotinja.columnAtPoint(evt.getPoint());
         if ( col == 2) {
             String opis = (String) jtblTabelaZivotinja.getModel().getValueAt(row, col);
-            JOptionPane.showMessageDialog(this, opis, "Opis kursa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, opis, "Opis zivotinje", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jtblTabelaZivotinjaMouseClicked
 
     private void jtfKriterijumPretrageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfKriterijumPretrageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfKriterijumPretrageActionPerformed
+
+    private void jbtObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtObrisiActionPerformed
+  int izabraniRed = jtblTabelaZivotinja.getSelectedRow();
+        if (izabraniRed == -1) {
+            JOptionPane.showConfirmDialog(jtblTabelaZivotinja, "Niste obelezili koju životinju zelite da obrisete", "Brisanje životinje", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            try {
+                ModelTabeleZivotinja modelTabeleZivotinja = (ModelTabeleZivotinja) jtblTabelaZivotinja.getModel();
+                Zivotinja z = modelTabeleZivotinja.vratiZivotinju(izabraniRed);
+                TransferObjekatZahtev toz = new TransferObjekatZahtev();
+                toz.setOperacija(Konstante.OBRISI_ZIVOTINJU);
+                toz.setParametar(z);
+                Komunikacija.vratiObjekat().posaljiZahtev(toz);
+                TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+                JOptionPane.showMessageDialog(jtblTabelaZivotinja, ""+too.getOdgovor()+" : "+z.getNaziv(), "Brisanje životinje", JOptionPane.INFORMATION_MESSAGE);
+                modelTabeleZivotinja.obrisiOZivotinju(izabraniRed);
+            } catch (IOException ex) {
+                Logger.getLogger(FrmBrisanjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FrmBrisanjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtObrisiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
