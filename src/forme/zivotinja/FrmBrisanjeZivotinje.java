@@ -18,6 +18,7 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
      */
     public FrmBrisanjeZivotinje() {
         initComponents();
+        popuniTabelu();
     }
 
     /**
@@ -166,4 +167,8 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
     private javax.swing.JTable jtblTabelaZivotinja;
     private javax.swing.JTextField jtfKriterijumPretrage;
     // End of variables declaration//GEN-END:variables
+
+    private void popuniTabelu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
