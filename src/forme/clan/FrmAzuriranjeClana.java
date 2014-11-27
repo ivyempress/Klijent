@@ -321,25 +321,28 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
             TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
             List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
-            jcbOrganizacija.setModel(new DefaultComboBoxModel(listaOrganizacija.toArray()));
+            DefaultComboBoxModel dcbmOrganizacija = new DefaultComboBoxModel(listaOrganizacija.toArray());
+            jcbOrganizacija.setModel(dcbmOrganizacija);
 
             toZahtev = new TransferObjekatZahtev();
             toZahtev.setOperacija(Konstante.VRATI_SVE_GRADOVE);
             Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
             too = Komunikacija.vratiObjekat().procitajOdgovor();
             List<Grad> listaGradova = (List<Grad>) too.getRezultat();
-            for (Grad g : listaGradova) {
-                jcbGrad.addItem(g);
-            }
+            DefaultComboBoxModel dcbmGrad = new DefaultComboBoxModel(listaGradova.toArray());
+            jcbGrad.setModel(dcbmGrad);
+
             jtfJmbg.setEnabled(false);
             Clan c = (Clan) jcbListaClanova.getSelectedItem();
             jtfJmbg.setText(c.getJmbg());
             jtfIme.setText(c.getIme());
+            
             jtfPrezime.setText(c.getPrezime());
             jdcDatumRodjenja.setDate(c.getDatumRodjenja());
             jdcDatumUclanjenja.setDate(c.getDatumUclanjenja());
-            jcbGrad.setSelectedItem(c.getDrzava());
-            jcbOrganizacija.setSelectedItem(c.getOrganizacija());
+
+            dcbmGrad.setSelectedItem(c.getDrzava());
+            dcbmOrganizacija.setSelectedItem(c.getOrganizacija());
         } catch (IOException ex) {
             Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
