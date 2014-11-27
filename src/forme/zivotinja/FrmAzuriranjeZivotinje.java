@@ -5,22 +5,6 @@
  */
 package forme.zivotinja;
 
-import domen.Organizacija;
-import domen.Zivotinja;
-import forme.organizacija.FrmAzuriranjeOrganizacije;
-import forme.organizacija.FrmBrisanjeOrganizacije;
-import java.awt.Component;
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import komunikacija.Komunikacija;
-import transfer.TransferObjekatOdgovor;
-import transfer.TransferObjekatZahtev;
-import util.Konstante;
-
 /**
  *
  * @author Ivana
@@ -32,8 +16,6 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
      */
     public FrmAzuriranjeZivotinje() {
         initComponents();
-        popuniKomboBoks();
-        formatirajPolja(false);
     }
 
     /**
@@ -55,19 +37,12 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jtfZivotinjaID = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Ažuriranje životinje", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
         jLabel1.setText("Lista svih životinja:");
 
         jcbListaZivotinja.setBackground(new java.awt.Color(255, 51, 255));
-        jcbListaZivotinja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbListaZivotinjaActionPerformed(evt);
-            }
-        });
 
         jpAzuriranjeZivotinje.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -82,19 +57,6 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
         jButton2.setText("Poništi unos");
 
         jButton1.setText("Sačuvaj životinju");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("ID životinje:");
-
-        jtfZivotinjaID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfZivotinjaIDActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jpAzuriranjeZivotinjeLayout = new javax.swing.GroupLayout(jpAzuriranjeZivotinje);
         jpAzuriranjeZivotinje.setLayout(jpAzuriranjeZivotinjeLayout);
@@ -104,37 +66,25 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jpAzuriranjeZivotinjeLayout.createSequentialGroup()
+                        .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpAzuriranjeZivotinjeLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jLabel3)))
+                        .addGap(34, 34, 34)
+                        .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfNazivZivotinje, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpAzuriranjeZivotinjeLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpAzuriranjeZivotinjeLayout.createSequentialGroup()
-                        .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpAzuriranjeZivotinjeLayout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpAzuriranjeZivotinjeLayout.createSequentialGroup()
-                                .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAzuriranjeZivotinjeLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(40, 40, 40))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAzuriranjeZivotinjeLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(55, 55, 55)))
-                                .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfNazivZivotinje, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfZivotinjaID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(24, 24, 24)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         jpAzuriranjeZivotinjeLayout.setVerticalGroup(
             jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAzuriranjeZivotinjeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtfZivotinjaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfNazivZivotinje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -142,7 +92,7 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
                 .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jpAzuriranjeZivotinjeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -161,9 +111,9 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
                         .addGap(42, 42, 42)
                         .addComponent(jcbListaZivotinja, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(21, 21, 21)
                         .addComponent(jpAzuriranjeZivotinje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,39 +124,9 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
                     .addComponent(jcbListaZivotinja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jpAzuriranjeZivotinje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtfZivotinjaIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfZivotinjaIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfZivotinjaIDActionPerformed
-
-    private void jcbListaZivotinjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListaZivotinjaActionPerformed
-        popuniPolja();
-    }//GEN-LAST:event_jcbListaZivotinjaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- try {
-            Zivotinja z = new Zivotinja();
-            z.setZivotinjaID(Integer.parseInt(jtfZivotinjaID.getText()));
-            z.setNaziv(jtfNazivZivotinje.getText());
-            z.setOpisVrste(jtaOpisZivotinje.getText());
-          
-            TransferObjekatZahtev toz = new TransferObjekatZahtev();
-            toz.setOperacija(Konstante.IZMENI_ZIVOTINJU);
-            toz.setParametar(z);
-            Komunikacija.vratiObjekat().posaljiZahtev(toz);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            JOptionPane.showMessageDialog(jpAzuriranjeZivotinje, "Uspesno ste izmenili zivotinju", "Izmena zivotinje", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println(""+too.getOdgovor());
-        } catch (IOException ex) {
-            Logger.getLogger(FrmAzuriranjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmAzuriranjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                                 
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,45 +135,10 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbListaZivotinja;
     private javax.swing.JPanel jpAzuriranjeZivotinje;
     private javax.swing.JTextArea jtaOpisZivotinje;
     private javax.swing.JTextField jtfNazivZivotinje;
-    private javax.swing.JTextField jtfZivotinjaID;
     // End of variables declaration//GEN-END:variables
-
-    private void popuniKomboBoks() {
-        try {
-            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.VRATI_SVE_ZIVOTINJE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
-            jcbListaZivotinja.setModel(new DefaultComboBoxModel(listaOrganizacija.toArray()));
-        } catch (IOException ex) {
-            Logger.getLogger(FrmAzuriranjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmAzuriranjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void popuniPolja() {
-        formatirajPolja(true);
-        jtfZivotinjaID.setEnabled(false);
-        Zivotinja z = (Zivotinja) jcbListaZivotinja.getSelectedItem();
-        jtfZivotinjaID.setText(String.valueOf(z.getZivotinjaID()));
-        jtfNazivZivotinje.setText(z.getNaziv());
-        jtaOpisZivotinje.setText(z.getOpisVrste());
-
-    }
-
-    private void formatirajPolja(Boolean b) {
-        for (Component c : jpAzuriranjeZivotinje.getComponents()) {
-            c.setEnabled(b);
-        }
-        jtaOpisZivotinje.setEnabled(b);
-    }
-
 }
