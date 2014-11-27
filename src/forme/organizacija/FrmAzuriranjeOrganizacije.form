@@ -4,7 +4,7 @@
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="A&#x17e;uriranje organizacije">
+        <TitledBorder justification="2" position="3" title="A&#x17e;uriranje organizacije">
           <Font PropertyName="font" name="Arial" size="10" style="1"/>
         </TitledBorder>
       </Border>
@@ -53,7 +53,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jpUnosOrganizacije" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

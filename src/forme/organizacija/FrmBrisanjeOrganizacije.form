@@ -4,10 +4,7 @@
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="Brisanje organizacije">
-          <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
-            <BevelBorder/>
-          </Border>
+        <TitledBorder justification="2" position="3" title="Brisanje organizacije">
           <Font PropertyName="font" name="Arial" size="10" style="1"/>
         </TitledBorder>
       </Border>
@@ -29,7 +26,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="356" max="32767" attributes="0"/>
+              <EmptySpace pref="358" max="32767" attributes="0"/>
               <Component id="jbtObrisi" min="-2" pref="150" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -64,7 +61,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="287" max="32767" attributes="0"/>
+              <EmptySpace pref="283" max="32767" attributes="0"/>
               <Component id="jbtObrisi" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
           </Group>
@@ -84,7 +81,7 @@
                   <Component id="jScrollPane1" min="-2" pref="165" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jbtPrikaziSveOrganiyacije" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="51" max="32767" attributes="0"/>
+                  <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>

@@ -12,6 +12,7 @@ import forme.clan.FrmBrisanjeClana;
 import forme.organizacija.FrmAzuriranjeOrganizacije;
 import forme.organizacija.FrmBrisanjeOrganizacije;
 import forme.organizacija.FrmUnosOrganizacije;
+import forme.pretraga.FrmPretraga;
 import forme.zivotinja.FrmAzuriranjeZivotinje;
 import forme.zivotinja.FrmBrisanjeZivotinje;
 import forme.zivotinja.FrmUnosZivotinje;
@@ -49,7 +50,8 @@ public class FrmGlavna extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jpPanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
+        jmPretraga = new javax.swing.JMenu();
+        jmiPretraga = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jmiDodavanjeOrganizacije = new javax.swing.JMenuItem();
         jmiAzuriranjeOrganizacije = new javax.swing.JMenuItem();
@@ -79,13 +81,22 @@ public class FrmGlavna extends javax.swing.JFrame {
         jpPanel.setMinimumSize(new java.awt.Dimension(630, 760));
         jpPanel.setPreferredSize(new java.awt.Dimension(630, 760));
         jpPanel.setLayout(new java.awt.GridLayout(1, 0));
-        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 630, 550));
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 630, 550));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));
 
-        jMenu4.setText("Početna!     ");
-        jMenuBar1.add(jMenu4);
+        jmPretraga.setText("Pretraga!     ");
+
+        jmiPretraga.setText("Pretraga članova");
+        jmiPretraga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPretragaActionPerformed(evt);
+            }
+        });
+        jmPretraga.add(jmiPretraga);
+
+        jMenuBar1.add(jmPretraga);
 
         jMenu1.setText("Organizacija     ");
 
@@ -221,6 +232,11 @@ public class FrmGlavna extends javax.swing.JFrame {
         postaviAktivniPanel(fbz);
     }//GEN-LAST:event_jmiBrisanjeZivotinjeActionPerformed
 
+    private void jmiPretragaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaActionPerformed
+       FrmPretraga fp = new FrmPretraga();
+        postaviAktivniPanel(fp);
+    }//GEN-LAST:event_jmiPretragaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -261,8 +277,8 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmPretraga;
     private javax.swing.JMenuItem jmiAzuriranjeClana;
     private javax.swing.JMenuItem jmiAzuriranjeOrganizacije;
     private javax.swing.JMenuItem jmiAzuriranjeZivotinje;
@@ -272,6 +288,7 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiDodavanjeClana;
     private javax.swing.JMenuItem jmiDodavanjeOrganizacije;
     private javax.swing.JMenuItem jmiDodavanjeZivotinje;
+    private javax.swing.JMenuItem jmiPretraga;
     private javax.swing.JPanel jpPanel;
     // End of variables declaration//GEN-END:variables
 

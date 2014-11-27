@@ -68,7 +68,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
         jbtSacuvaj = new javax.swing.JButton();
         jbtPonisti = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unos novog člana", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unos novog člana", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
         jLabel1.setText("JMBG:");
 

@@ -69,7 +69,7 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jcbListaClanova = new javax.swing.JComboBox();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje člana", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje člana", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Arial", 1, 10))); // NOI18N
         setPreferredSize(new java.awt.Dimension(474, 410));
 
         jpClan.setBorder(javax.swing.BorderFactory.createEtchedBorder());

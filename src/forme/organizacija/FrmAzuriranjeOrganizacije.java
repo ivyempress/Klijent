@@ -59,7 +59,7 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jtfOrganizacijaID = new javax.swing.JTextField();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje organizacije", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje organizacije", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Arial", 1, 10))); // NOI18N
         setMinimumSize(new java.awt.Dimension(100, 100));
         setName(""); // NOI18N
 
@@ -184,7 +184,7 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
                     .addComponent(jcbListaOrganizacija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jpUnosOrganizacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

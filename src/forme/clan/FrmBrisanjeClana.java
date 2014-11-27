@@ -51,7 +51,7 @@ public class FrmBrisanjeClana extends javax.swing.JPanel {
         jbtPronadjiClanove = new javax.swing.JButton();
         jlKriterijumiKursa = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Obriši člana", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Obriši člana", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
         jbtPrikaziSveClanove.setText("Prikaži sve članove");
         jbtPrikaziSveClanove.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +144,7 @@ public class FrmBrisanjeClana extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtObrisi)
                     .addComponent(jbtPrikaziSveClanove))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

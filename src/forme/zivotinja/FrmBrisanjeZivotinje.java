@@ -38,7 +38,7 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
         jtfKriterijumPretrage = new javax.swing.JTextField();
         jlUnesiteKriterijumPretrageKursa = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Brisanje životinje", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Brisanje životinje", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
         jbtPronadjiYivotinje.setText("Pronađi");
         jbtPronadjiYivotinje.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +129,7 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtPrikaziSveZivotinje)
                     .addComponent(jbtObrisi))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

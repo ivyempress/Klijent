@@ -4,10 +4,7 @@
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="Brisanje &#x17e;ivotinje">
-          <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-            <EtchetBorder/>
-          </Border>
+        <TitledBorder justification="2" position="3" title="Brisanje &#x17e;ivotinje">
           <Font PropertyName="font" name="Arial" size="10" style="1"/>
         </TitledBorder>
       </Border>
@@ -79,7 +76,7 @@
                   <Component id="jbtPrikaziSveZivotinje" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtObrisi" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="61" max="32767" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
