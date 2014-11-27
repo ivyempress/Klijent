@@ -74,12 +74,12 @@ public class FrmGlavna extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/forme/maca.png"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 480, 220));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 640, 220));
 
         jpPanel.setMinimumSize(new java.awt.Dimension(630, 760));
         jpPanel.setPreferredSize(new java.awt.Dimension(630, 760));
         jpPanel.setLayout(new java.awt.GridLayout(1, 0));
-        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 630, 550));
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 630, 550));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));
