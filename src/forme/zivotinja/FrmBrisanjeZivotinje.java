@@ -79,7 +79,7 @@ public class FrmBrisanjeZivotinje extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtblTabelaZivotinja);
 
         jlKriterijumiKursa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jlKriterijumiKursa.setText("naziv/opis");
+        jlKriterijumiKursa.setText("naziv");
 
         jbtObrisi.setText("Obriši životinju");
         jbtObrisi.addActionListener(new java.awt.event.ActionListener() {
