@@ -9,13 +9,21 @@ import domen.Clan;
 import domen.Grad;
 import domen.Ljubimac;
 import domen.Organizacija;
+import domen.Zivotinja;
 import forme.organizacija.FrmBrisanjeOrganizacije;
 import java.awt.Component;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 import komunikacija.Komunikacija;
 import transfer.TransferObjekatOdgovor;
 import transfer.TransferObjekatZahtev;
@@ -30,6 +38,8 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
     /**
      * Creates new form FrmAzuriranjeClana
      */
+    List<Ljubimac> novaListaLjubimaca = new ArrayList<>();
+
     public FrmAzuriranjeClana() {
         initComponents();
         srediFormu();
@@ -45,6 +55,8 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jpClan = new javax.swing.JPanel();
         jdcDatumUclanjenja = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
@@ -60,14 +72,33 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jbtPonisti = new javax.swing.JButton();
         jcbGrad = new javax.swing.JComboBox();
-        jbtSacuvaj = new javax.swing.JButton();
+        jbtAzurirajClana = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblLjubimci = new javax.swing.JTable();
-        jbtDodajLjubimca = new javax.swing.JButton();
-        jbtObrisiLjubimca = new javax.swing.JButton();
+        jpLjubimac = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jtfImeLjubimca = new javax.swing.JTextField();
+        jcbZivotinja = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jdcDatumSpasavanjaLjubimca = new com.toedter.calendar.JDateChooser();
+        jbtDodajLjubimca1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jcbListaClanova = new javax.swing.JComboBox();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ažuriranje člana", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Arial", 1, 10))); // NOI18N
         setPreferredSize(new java.awt.Dimension(474, 410));
@@ -93,8 +124,18 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
         jLabel6.setText("Organizacija:");
 
         jbtPonisti.setText("Poništi unos");
+        jbtPonisti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPonistiActionPerformed(evt);
+            }
+        });
 
-        jbtSacuvaj.setText("Sačuvaj promene");
+        jbtAzurirajClana.setText("Azuriraj clana");
+        jbtAzurirajClana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtAzurirajClanaActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Mesto rođenja:");
 
@@ -111,9 +152,69 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jtblLjubimci);
 
-        jbtDodajLjubimca.setText("Dodaj ljubimca");
+        jpLjubimac.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Unos ljubimca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 10), new java.awt.Color(102, 0, 204))); // NOI18N
 
-        jbtObrisiLjubimca.setText("Obriši ljubimca");
+        jLabel9.setText("Ime ljubimca:");
+
+        jcbZivotinja.setBackground(new java.awt.Color(255, 204, 204));
+        jcbZivotinja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbZivotinjaActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Životinja:");
+
+        jLabel11.setText("Datum spašavanja:");
+
+        jbtDodajLjubimca1.setText("Dodaj novog ljubimca");
+        jbtDodajLjubimca1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtDodajLjubimca1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpLjubimacLayout = new javax.swing.GroupLayout(jpLjubimac);
+        jpLjubimac.setLayout(jpLjubimacLayout);
+        jpLjubimacLayout.setHorizontalGroup(
+            jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLjubimacLayout.createSequentialGroup()
+                .addGroup(jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpLjubimacLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtDodajLjubimca1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpLjubimacLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addGroup(jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfImeLjubimca)
+                            .addComponent(jcbZivotinja, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jdcDatumSpasavanjaLjubimca, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))))
+                .addGap(39, 39, 39))
+        );
+        jpLjubimacLayout.setVerticalGroup(
+            jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpLjubimacLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jtfImeLjubimca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jcbZivotinja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpLjubimacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jdcDatumSpasavanjaLjubimca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtDodajLjubimca1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jpClanLayout = new javax.swing.GroupLayout(jpClan);
         jpClan.setLayout(jpClanLayout);
@@ -122,43 +223,42 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
             .addGroup(jpClanLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtDodajLjubimca, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jpClanLayout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jtfJmbg))
-                        .addGroup(jpClanLayout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jtfIme, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel3)
-                            .addGap(10, 10, 10)
-                            .addComponent(jtfPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel5)
-                        .addGroup(jpClanLayout.createSequentialGroup()
-                            .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel6))
-                            .addGap(28, 28, 28)
-                            .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jcbGrad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jcbOrganizacija, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jdcDatumUclanjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                                .addComponent(jdcDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jpClanLayout.createSequentialGroup()
-                            .addComponent(jbtSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpClanLayout.createSequentialGroup()
+                        .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jpClanLayout.createSequentialGroup()
-                                .addGap(246, 246, 246)
-                                .addComponent(jbtObrisiLjubimca, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jbtAzurirajClana, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jpClanLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtfJmbg))
+                                    .addGroup(jpClanLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jtfIme, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel3)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jtfPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel5)
+                                    .addGroup(jpClanLayout.createSequentialGroup()
+                                        .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel6))
+                                        .addGap(28, 28, 28)
+                                        .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jcbGrad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jcbOrganizacija, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jdcDatumUclanjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                                            .addComponent(jdcDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jpLjubimac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpClanLayout.setVerticalGroup(
             jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,17 +294,15 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
                 .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jdcDatumUclanjenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jpLjubimac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtDodajLjubimca)
-                    .addComponent(jbtObrisiLjubimca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpClanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtPonisti)
-                    .addComponent(jbtSacuvaj))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbtAzurirajClana)
+                    .addComponent(jbtPonisti))
+                .addGap(26, 26, 26))
         );
 
         jLabel4.setText("Lista svih članova:");
@@ -221,16 +319,15 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jcbListaClanova, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbListaClanova, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jpClan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(jpClan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +337,8 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(jcbListaClanova, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpClan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpClan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -252,9 +350,77 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
         popuniPolja();
     }//GEN-LAST:event_jcbListaClanovaActionPerformed
 
+    private void jbtAzurirajClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAzurirajClanaActionPerformed
+        try {
+            Clan clan = new Clan();
+            clan.setJmbg(jtfJmbg.getText());
+            clan.setIme(jtfIme.getText().trim());
+            clan.setPrezime(jtfPrezime.getText().trim());
+            clan.setDatumRodjenja(jdcDatumRodjenja.getDate());
+            clan.setDrzava((Grad) jcbGrad.getSelectedItem());
+            clan.setOrganizacija((Organizacija) jcbOrganizacija.getSelectedItem());
+            clan.setDatumUclanjenja(jdcDatumUclanjenja.getDate());
+            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.IZMENI_CLANA);
+            toZahtev.setParametar(clan);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            TransferObjekatOdgovor toOdgovor = Komunikacija.vratiObjekat().procitajOdgovor();
+            JOptionPane.showMessageDialog(jpLjubimac, toOdgovor.getOdgovor(), "Izmena clana", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtAzurirajClanaActionPerformed
+
+    private void jcbZivotinjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbZivotinjaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbZivotinjaActionPerformed
+
+    private void jbtDodajLjubimca1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDodajLjubimca1ActionPerformed
+        try {
+            Date datumSpasavanjaLjubimca = jdcDatumSpasavanjaLjubimca.getDate();
+            if (jtfImeLjubimca.getText().isEmpty() || datumSpasavanjaLjubimca == null) {
+                JOptionPane.showMessageDialog(jpLjubimac, "Morate uneti sva polja na formi da bi dodali ljubmica", "Dodavanje ljubmica", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            ModelTabeleLjubimac mtlj = (ModelTabeleLjubimac) jtblLjubimci.getModel();
+
+            String imeLjubimca = jtfImeLjubimca.getText().trim();
+            Ljubimac ljubimac = new Ljubimac();
+            ljubimac.setVlasnik((Clan) jcbListaClanova.getSelectedItem());
+            ljubimac.setImeLjubimca(imeLjubimca);
+            ljubimac.setDatumSpasavanja(datumSpasavanjaLjubimca);
+            ljubimac.setVrstaZivotinje((Zivotinja) jcbZivotinja.getSelectedItem());
+            ljubimac.setLjubimacID(mtlj.getClan().getListaLjubimaca().size() + 1);
+            novaListaLjubimaca.add(ljubimac);
+            TransferObjekatZahtev tozAhtev = new TransferObjekatZahtev();
+            tozAhtev.setOperacija(Konstante.SACUVAJ_LJUBIMCA);
+            tozAhtev.setParametar(ljubimac);
+
+            Komunikacija.vratiObjekat().posaljiZahtev(tozAhtev);
+            TransferObjekatOdgovor to = Komunikacija.vratiObjekat().procitajOdgovor();
+            srediFormu();
+            mtlj.fireTableDataChanged();
+
+            JOptionPane.showMessageDialog(jpLjubimac, "Uspesno ste uneli ljubimca : " + ljubimac.getImeLjubimca(), imeLjubimca, JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jbtDodajLjubimca1ActionPerformed
+
+    private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
+        popuniPolja();
+    }//GEN-LAST:event_jbtPonistiActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -262,19 +428,25 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtDodajLjubimca;
-    private javax.swing.JButton jbtObrisiLjubimca;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbtAzurirajClana;
+    private javax.swing.JButton jbtDodajLjubimca1;
     private javax.swing.JButton jbtPonisti;
-    private javax.swing.JButton jbtSacuvaj;
     private javax.swing.JComboBox jcbGrad;
     private javax.swing.JComboBox jcbListaClanova;
     private javax.swing.JComboBox jcbOrganizacija;
+    private javax.swing.JComboBox jcbZivotinja;
     private com.toedter.calendar.JDateChooser jdcDatumRodjenja;
+    private com.toedter.calendar.JDateChooser jdcDatumSpasavanjaLjubimca;
     private com.toedter.calendar.JDateChooser jdcDatumUclanjenja;
     private javax.swing.JPanel jpClan;
+    private javax.swing.JPanel jpLjubimac;
     private javax.swing.JTable jtblLjubimci;
     private javax.swing.JTextField jtfIme;
+    private javax.swing.JTextField jtfImeLjubimca;
     private javax.swing.JTextField jtfJmbg;
     private javax.swing.JTextField jtfPrezime;
     // End of variables declaration//GEN-END:variables
@@ -298,6 +470,7 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
                 List<Ljubimac> listaLjubimaca = (List<Ljubimac>) too.getRezultat();
                 ck.setListaLjubimaca(listaLjubimaca);
             }
+            System.out.println("");
         } catch (IOException ex) {
             Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -307,6 +480,9 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
 
     private void formatirajPolja(Boolean b) {
         for (Component c : jpClan.getComponents()) {
+            c.setEnabled(b);
+        }
+        for (Component c : jpLjubimac.getComponents()) {
             c.setEnabled(b);
         }
         jtblLjubimci.setEnabled(b);
@@ -336,13 +512,32 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
             Clan c = (Clan) jcbListaClanova.getSelectedItem();
             jtfJmbg.setText(c.getJmbg());
             jtfIme.setText(c.getIme());
-            
+
             jtfPrezime.setText(c.getPrezime());
             jdcDatumRodjenja.setDate(c.getDatumRodjenja());
             jdcDatumUclanjenja.setDate(c.getDatumUclanjenja());
 
             dcbmGrad.setSelectedItem(c.getDrzava());
             dcbmOrganizacija.setSelectedItem(c.getOrganizacija());
+
+            JComboBox jcbZivotinja2 = new JComboBox();
+
+            toZahtev = new TransferObjekatZahtev();
+            toZahtev.setOperacija(Konstante.VRATI_SVE_ZIVOTINJE);
+            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+            too = Komunikacija.vratiObjekat().procitajOdgovor();
+            List<Zivotinja> listaZivotinja = (List<Zivotinja>) too.getRezultat();
+            DefaultComboBoxModel boxModel = new DefaultComboBoxModel(listaZivotinja.toArray());
+            jcbZivotinja2.setModel(boxModel);
+            System.out.println(too.getOdgovor());
+
+            ModelTabeleLjubimac modelTabeleLjubimac = new ModelTabeleLjubimac(c, boxModel);
+            jtblLjubimci.setModel(modelTabeleLjubimac);
+
+            TableColumn column = jtblLjubimci.getColumnModel().getColumn(3);
+            column.setCellEditor(new DefaultCellEditor(jcbZivotinja2));
+            jcbZivotinja.setModel(boxModel);
+
         } catch (IOException ex) {
             Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

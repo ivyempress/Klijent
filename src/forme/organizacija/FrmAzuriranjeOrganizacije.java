@@ -100,6 +100,11 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
         });
 
         jbtPonisti.setText("Poništi promene");
+        jbtPonisti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPonistiActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Id organizacije :");
 
@@ -217,6 +222,10 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
             Logger.getLogger(FrmAzuriranjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtSacuvajActionPerformed
+
+    private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
+        popuniPolja();
+    }//GEN-LAST:event_jbtPonistiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

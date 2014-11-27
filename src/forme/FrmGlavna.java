@@ -5,7 +5,7 @@
  */
 package forme;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
+
 import forme.clan.FrmAzuriranjeClana;
 import forme.clan.FrmUnosClana;
 import forme.clan.FrmBrisanjeClana;
@@ -16,10 +16,7 @@ import forme.pretraga.FrmPretraga;
 import forme.zivotinja.FrmAzuriranjeZivotinje;
 import forme.zivotinja.FrmBrisanjeZivotinje;
 import forme.zivotinja.FrmUnosZivotinje;
-import java.awt.BorderLayout;
-import java.awt.Component;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
@@ -36,6 +33,7 @@ public class FrmGlavna extends javax.swing.JFrame {
     public FrmGlavna() {
         initComponents();
         postaviImeIIkonicu();
+        postaviPocetniPanel();
     }
 
     /**
@@ -69,7 +67,7 @@ public class FrmGlavna extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(240, 217, 163));
         setFocusTraversalPolicyProvider(true);
-        setMinimumSize(new java.awt.Dimension(640, 800));
+        setMinimumSize(new java.awt.Dimension(640, 900));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -78,10 +76,10 @@ public class FrmGlavna extends javax.swing.JFrame {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 640, 220));
 
-        jpPanel.setMinimumSize(new java.awt.Dimension(630, 760));
+        jpPanel.setMinimumSize(new java.awt.Dimension(630, 800));
         jpPanel.setPreferredSize(new java.awt.Dimension(630, 760));
         jpPanel.setLayout(new java.awt.GridLayout(1, 0));
-        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 630, 550));
+        getContentPane().add(jpPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 630, 670));
 
         jMenuBar1.setBackground(new java.awt.Color(223, 205, 164));
         jMenuBar1.setMaximumSize(new java.awt.Dimension(333333, 32769));
@@ -306,6 +304,11 @@ public class FrmGlavna extends javax.swing.JFrame {
         setTitle("Ivana Lukic");
         ImageIcon img = new ImageIcon("dog.png");
         setIconImage(img.getImage());
+    }
+
+    private void postaviPocetniPanel() {
+        FrmPretraga pretraga = new FrmPretraga();
+        postaviAktivniPanel(pretraga);
     }
     
 }
