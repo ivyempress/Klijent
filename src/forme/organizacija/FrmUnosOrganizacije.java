@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import kontroler.Organizacija.KKIFrmUnosOrganizacije;
 import transfer.TransferObjekatOdgovor;
 import transfer.TransferObjekatZahtev;
 import util.Konstante;
@@ -147,47 +148,49 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfImeOsnivacaActionPerformed
 
     private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
-        try {
-            //postavljanje ID organizacije
-            Date datumOsnivanja = jdcDatumOsnivanja.getDate();
-            if (jtfNazivOrganizacije.getText().isEmpty() || jtfImeOsnivaca.getText().isEmpty() || jtaOpisDelatnosti.getText().isEmpty()|| datumOsnivanja == null) {
-                 JOptionPane.showMessageDialog(jScrollPane2, "Niste uneli sva polja na formi ", "Cuvanje organizacije", JOptionPane.WARNING_MESSAGE);
-                 return;
-            }
-            TransferObjekatZahtev toz = new TransferObjekatZahtev();
-            toz.setOperacija(Konstante.VRATI_ID_ORGANIZACIJE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toz);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            System.out.println(""+too.getRezultat());
-            int organizacijaID = (int) too.getRezultat();
-            System.out.println("ID nove organizacije je : "+organizacijaID);
-            //cuvanje Organizacije
-            Organizacija o = new Organizacija();
-            o.setOrganizacijaID(organizacijaID);
-            o.setNazivOrganizacije(jtfNazivOrganizacije.getText().trim());
-            o.setImeOsnivaca(jtfImeOsnivaca.getText().trim());
-            o.setDatumOsnivanja(datumOsnivanja);
-            o.setOpisDelatnosti(jtaOpisDelatnosti.getText());
-            toz.setOperacija(Konstante.SACUVAJ_ORGANIZACIJU);
-            toz.setParametar(o);
-            Komunikacija.vratiObjekat().posaljiZahtev(toz);
-            too = Komunikacija.vratiObjekat().procitajOdgovor();
-            System.out.println(""+too.getOdgovor());
-            JOptionPane.showMessageDialog(jScrollPane2, "Uspesno je sacuvana organizacija "+o.getNazivOrganizacije()+" , ID="+o.getOrganizacijaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(FrmUnosOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmUnosOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            //postavljanje ID organizacije
+//            Date datumOsnivanja = jdcDatumOsnivanja.getDate();
+//            if (jtfNazivOrganizacije.getText().isEmpty() || jtfImeOsnivaca.getText().isEmpty() || jtaOpisDelatnosti.getText().isEmpty()|| datumOsnivanja == null) {
+//                 JOptionPane.showMessageDialog(jScrollPane2, "Niste uneli sva polja na formi ", "Cuvanje organizacije", JOptionPane.WARNING_MESSAGE);
+//                 return;
+//            }
+//            TransferObjekatZahtev toz = new TransferObjekatZahtev();
+//            toz.setOperacija(Konstante.VRATI_ID_ORGANIZACIJE);
+//            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+//            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+//            System.out.println(""+too.getRezultat());
+//            int organizacijaID = (int) too.getRezultat();
+//            System.out.println("ID nove organizacije je : "+organizacijaID);
+//            //cuvanje Organizacije
+//            Organizacija o = new Organizacija();
+//            o.setOrganizacijaID(organizacijaID);
+//            o.setNazivOrganizacije(jtfNazivOrganizacije.getText().trim());
+//            o.setImeOsnivaca(jtfImeOsnivaca.getText().trim());
+//            o.setDatumOsnivanja(datumOsnivanja);
+//            o.setOpisDelatnosti(jtaOpisDelatnosti.getText());
+//            toz.setOperacija(Konstante.SACUVAJ_ORGANIZACIJU);
+//            toz.setParametar(o);
+//            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+//            too = Komunikacija.vratiObjekat().procitajOdgovor();
+//            System.out.println(""+too.getOdgovor());
+//            JOptionPane.showMessageDialog(jScrollPane2, "Uspesno je sacuvana organizacija "+o.getNazivOrganizacije()+" , ID="+o.getOrganizacijaID(), "Cuvanje organizacije", JOptionPane.INFORMATION_MESSAGE);
+//            
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(FrmUnosOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(FrmUnosOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        KKIFrmUnosOrganizacije.sacuvaOrganizaciju(jdcDatumOsnivanja, jtfNazivOrganizacije, jtfImeOsnivaca, jtaOpisDelatnosti, jScrollPane2);
     }//GEN-LAST:event_jbtSacuvajActionPerformed
 
     private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
-        jtfNazivOrganizacije.setText("");
-        jtfImeOsnivaca.setText("");
-        jtaOpisDelatnosti.setText("");
-        jdcDatumOsnivanja.setDate(null);
+//        jtfNazivOrganizacije.setText("");
+//        jtfImeOsnivaca.setText("");
+//        jtaOpisDelatnosti.setText("");
+//        jdcDatumOsnivanja.setDate(null);
+        KKIFrmUnosOrganizacije.ponistiUnos(jtfNazivOrganizacije, jtfImeOsnivaca, jtaOpisDelatnosti, jdcDatumOsnivanja);
     }//GEN-LAST:event_jbtPonistiActionPerformed
 
 

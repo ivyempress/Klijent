@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import kontroler.Organizacija.KKIFrmAzuriranjeOrganizacije;
 import transfer.TransferObjekatOdgovor;
 import transfer.TransferObjekatZahtev;
 import util.Konstante;
@@ -29,8 +30,8 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
      */
     public FrmAzuriranjeOrganizacije() {
         initComponents();
-        popuniKomboBoks();
-        formatirajPolja(false);
+        KKIFrmAzuriranjeOrganizacije.popuniComboBox(jcbListaOrganizacija);
+        KKIFrmAzuriranjeOrganizacije.formatirajPolja(Boolean.FALSE, jpUnosOrganizacije, jtfOpisDelatnosti);
     }
 
     /**
@@ -198,33 +199,34 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfImeOsnivacaActionPerformed
 
     private void jcbListaOrganizacijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListaOrganizacijaActionPerformed
-        popuniPolja();
+        KKIFrmAzuriranjeOrganizacije.popuniPolja(jpUnosOrganizacije, jtfOpisDelatnosti, jtfOrganizacijaID, jcbListaOrganizacija, jtfNazivOrganizacije, jtfImeOsnivaca, jdcDatumOsnivanja);
     }//GEN-LAST:event_jcbListaOrganizacijaActionPerformed
 
     private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
-        try {
-            Organizacija o = new Organizacija();
-            o.setOrganizacijaID(Integer.parseInt(jtfOrganizacijaID.getText()));
-            o.setImeOsnivaca(jtfImeOsnivaca.getText());
-            o.setNazivOrganizacije(jtfNazivOrganizacije.getText().trim());
-            o.setOpisDelatnosti(jtfOpisDelatnosti.getText());
-            o.setDatumOsnivanja(jdcDatumOsnivanja.getDate());
-            TransferObjekatZahtev toz = new TransferObjekatZahtev();
-            toz.setOperacija(Konstante.IZMENI_ORGANIZACIJU);
-            toz.setParametar(o);
-            Komunikacija.vratiObjekat().posaljiZahtev(toz);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            JOptionPane.showMessageDialog(jpUnosOrganizacije, "Uspesno ste izmenili organizaciju", "Izmena organizacije", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println(""+too.getOdgovor());
-        } catch (IOException ex) {
-            Logger.getLogger(FrmAzuriranjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmAzuriranjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            Organizacija o = new Organizacija();
+//            o.setOrganizacijaID(Integer.parseInt(jtfOrganizacijaID.getText()));
+//            o.setImeOsnivaca(jtfImeOsnivaca.getText());
+//            o.setNazivOrganizacije(jtfNazivOrganizacije.getText().trim());
+//            o.setOpisDelatnosti(jtfOpisDelatnosti.getText());
+//            o.setDatumOsnivanja(jdcDatumOsnivanja.getDate());
+//            TransferObjekatZahtev toz = new TransferObjekatZahtev();
+//            toz.setOperacija(Konstante.IZMENI_ORGANIZACIJU);
+//            toz.setParametar(o);
+//            Komunikacija.vratiObjekat().posaljiZahtev(toz);
+//            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+//            JOptionPane.showMessageDialog(jpUnosOrganizacije, "Uspesno ste izmenili organizaciju", "Izmena organizacije", JOptionPane.INFORMATION_MESSAGE);
+//            System.out.println(""+too.getOdgovor());
+//        } catch (IOException ex) {
+//            Logger.getLogger(FrmAzuriranjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(FrmAzuriranjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        KKIFrmAzuriranjeOrganizacije.azurirajOrganizaciju(jtfOrganizacijaID, jtfImeOsnivaca, jtfNazivOrganizacije, jtfOpisDelatnosti, jdcDatumOsnivanja, jpUnosOrganizacije);
     }//GEN-LAST:event_jbtSacuvajActionPerformed
 
     private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
-        popuniPolja();
+        KKIFrmAzuriranjeOrganizacije.popuniPolja(jpUnosOrganizacije, jtfOpisDelatnosti, jtfOrganizacijaID, jcbListaOrganizacija, jtfNazivOrganizacije, jtfImeOsnivaca, jdcDatumOsnivanja);
     }//GEN-LAST:event_jbtPonistiActionPerformed
 
 
@@ -247,37 +249,10 @@ public class FrmAzuriranjeOrganizacije extends javax.swing.JPanel {
     private javax.swing.JTextField jtfOrganizacijaID;
     // End of variables declaration//GEN-END:variables
 
-    private void popuniKomboBoks() {
-        try {
-            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
-            jcbListaOrganizacija.setModel(new DefaultComboBoxModel(listaOrganizacija.toArray()));
-        } catch (IOException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    private void popuniPolja() {
-        formatirajPolja(true);
-        jtfOrganizacijaID.setEnabled(false);
-        Organizacija o = (Organizacija) jcbListaOrganizacija.getSelectedItem();
-        jtfOrganizacijaID.setText(String.valueOf(o.getOrganizacijaID()));
-        jtfNazivOrganizacije.setText(o.getNazivOrganizacije());
-        jtfImeOsnivaca.setText(o.getImeOsnivaca());
-        jdcDatumOsnivanja.setDate(o.getDatumOsnivanja());
-        jtfOpisDelatnosti.setText(o.getOpisDelatnosti());
-    }
 
-    private void formatirajPolja(Boolean b) {
-        for (Component c : jpUnosOrganizacije.getComponents()) {
-            c.setEnabled(b);
-        }
-        jtfOpisDelatnosti.setEnabled(b);
-    }
+
+
+
 
 }

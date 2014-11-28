@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
+import kontroler.Organizacija.KKIFRMBrisanjeOrganizacije;
 import transfer.TransferObjekatOdgovor;
 import transfer.TransferObjekatZahtev;
 import util.Konstante;
@@ -159,42 +160,42 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfKriterijumPretrageActionPerformed
 
     private void jbtPronadjiOrganizacijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPronadjiOrganizacijuActionPerformed
-        try {
-            if (jtfKriterijumPretrage.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(jScrollPane1, "Morate uneti kriterijum za pretragu", "Pretraga", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            String kriterijum = jtfKriterijumPretrage.getText().trim();
-            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.PRETRAZI_ORGANIZACIJE);
-            toZahtev.setParametar(kriterijum);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Organizacija> listaOrg = (List<Organizacija>) too.getRezultat();
-            jtblTabelaOrganizacija.setModel(new ModelTabeleOrganizacija(listaOrg));
-        } catch (IOException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+//        try {
+//            if (jtfKriterijumPretrage.getText().isEmpty()) {
+//                JOptionPane.showMessageDialog(jScrollPane1, "Morate uneti kriterijum za pretragu", "Pretraga", JOptionPane.WARNING_MESSAGE);
+//                return;
+//            }
+//            String kriterijum = jtfKriterijumPretrage.getText().trim();
+//            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+//            toZahtev.setOperacija(Konstante.PRETRAZI_ORGANIZACIJE);
+//            toZahtev.setParametar(kriterijum);
+//            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+//            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+//            List<Organizacija> listaOrg = (List<Organizacija>) too.getRezultat();
+//            jtblTabelaOrganizacija.setModel(new ModelTabeleOrganizacija(listaOrg));
+//        } catch (IOException ex) {
+//            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        KKIFRMBrisanjeOrganizacije.pronadjiOrganizaciju(jtfKriterijumPretrage, jScrollPane1, jtblTabelaOrganizacija);
 
     }//GEN-LAST:event_jbtPronadjiOrganizacijuActionPerformed
 
     private void jbtPrikaziSveOrganiyacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPrikaziSveOrganiyacijeActionPerformed
-        try {
-            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
-            jtblTabelaOrganizacija.setModel(new ModelTabeleOrganizacija(listaOrganizacija));
-        } catch (IOException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+//        try {
+//            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
+//            toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
+//            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
+//            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+//            List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
+//            jtblTabelaOrganizacija.setModel(new ModelTabeleOrganizacija(listaOrganizacija));
+//        } catch (IOException ex) {
+//            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        KKIFRMBrisanjeOrganizacije.prikaziSveOrganizacije(jtblTabelaOrganizacija);
     }//GEN-LAST:event_jbtPrikaziSveOrganiyacijeActionPerformed
 
     private void jtblTabelaOrganizacijaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblTabelaOrganizacijaMouseClicked
@@ -208,33 +209,33 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
     }//GEN-LAST:event_jtblTabelaOrganizacijaMouseClicked
 
     private void jbtObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtObrisiActionPerformed
-        int izabraniRed = jtblTabelaOrganizacija.getSelectedRow();
-        if (izabraniRed == -1) {
-            JOptionPane.showConfirmDialog(jtblTabelaOrganizacija, "Niste obelezili koju organizaciju zelite da obrisete", "Brisanje organizacije", JOptionPane.WARNING_MESSAGE);
-            return;
-        } else {
-            try {
-                ModelTabeleOrganizacija modelTabeleOrganizacija = (ModelTabeleOrganizacija) jtblTabelaOrganizacija.getModel();
-                Organizacija o = modelTabeleOrganizacija.vratiOrganizaciju(izabraniRed);
-                TransferObjekatZahtev toz = new TransferObjekatZahtev();
-                toz.setOperacija(Konstante.OBRISI_ORGANIZACIJU);
-                toz.setParametar(o);
-                Komunikacija.vratiObjekat().posaljiZahtev(toz);
-                TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-                if(too.getOdgovor()!=null){
-                JOptionPane.showMessageDialog(jtblTabelaOrganizacija, ""+too.getOdgovor()+" : "+o.getNazivOrganizacije(), "Brisanje organizacije", JOptionPane.INFORMATION_MESSAGE);
-                modelTabeleOrganizacija.obrisiOrganizaciju(izabraniRed);
-                }
-                else {JOptionPane.showMessageDialog(jtblTabelaOrganizacija, "Ne mozete da obrisete organizaciju, jer ona sadrzi aktivne clanove", "Brisanje organizacije", JOptionPane.ERROR_MESSAGE);
-               }
-            } catch (IOException ex) {
-                Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         
-        }
-
+//        int izabraniRed = jtblTabelaOrganizacija.getSelectedRow();
+//        if (izabraniRed == -1) {
+//            JOptionPane.showConfirmDialog(jtblTabelaOrganizacija, "Niste obelezili koju organizaciju zelite da obrisete", "Brisanje organizacije", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        } else {
+//            try {
+//                ModelTabeleOrganizacija modelTabeleOrganizacija = (ModelTabeleOrganizacija) jtblTabelaOrganizacija.getModel();
+//                Organizacija o = modelTabeleOrganizacija.vratiOrganizaciju(izabraniRed);
+//                TransferObjekatZahtev toz = new TransferObjekatZahtev();
+//                toz.setOperacija(Konstante.OBRISI_ORGANIZACIJU);
+//                toz.setParametar(o);
+//                Komunikacija.vratiObjekat().posaljiZahtev(toz);
+//                TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+//                if(too.getOdgovor()!=null){
+//                JOptionPane.showMessageDialog(jtblTabelaOrganizacija, ""+too.getOdgovor()+" : "+o.getNazivOrganizacije(), "Brisanje organizacije", JOptionPane.INFORMATION_MESSAGE);
+//                modelTabeleOrganizacija.obrisiOrganizaciju(izabraniRed);
+//                }
+//                else {JOptionPane.showMessageDialog(jtblTabelaOrganizacija, "Ne mozete da obrisete organizaciju, jer ona sadrzi aktivne clanove", "Brisanje organizacije", JOptionPane.ERROR_MESSAGE);
+//               }
+//            } catch (IOException ex) {
+//                Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//         
+//        }
+        KKIFRMBrisanjeOrganizacije.obrisiOrganizaciju(jtblTabelaOrganizacija);
     }//GEN-LAST:event_jbtObrisiActionPerformed
 
 
