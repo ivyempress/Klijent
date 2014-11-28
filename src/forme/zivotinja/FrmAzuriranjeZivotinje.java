@@ -77,6 +77,11 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
         jLabel3.setText("Naziv životinje:");
 
         jbtPonisti.setText("Poništi unos");
+        jbtPonisti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPonistiActionPerformed(evt);
+            }
+        });
 
         jbtSacuvaj.setText("Sačuvaj životinju");
         jbtSacuvaj.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +194,10 @@ public class FrmAzuriranjeZivotinje extends javax.swing.JPanel {
             Logger.getLogger(FrmAzuriranjeZivotinje.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jbtSacuvajActionPerformed
+
+    private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
+       popuniPolja();
+    }//GEN-LAST:event_jbtPonistiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

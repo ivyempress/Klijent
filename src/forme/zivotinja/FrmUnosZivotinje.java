@@ -57,6 +57,11 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
         });
 
         jbtPonisti.setText("Poništi unos");
+        jbtPonisti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPonistiActionPerformed(evt);
+            }
+        });
 
         jtaOpisZivotinje.setColumns(20);
         jtaOpisZivotinje.setRows(5);
@@ -140,6 +145,11 @@ public class FrmUnosZivotinje extends javax.swing.JPanel {
             Logger.getLogger(FrmUnosZivotinje.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtSacuvajActionPerformed
+
+    private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
+        jtfNazivZivotinje.setText("");
+        jtaOpisZivotinje.setText("");
+    }//GEN-LAST:event_jbtPonistiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

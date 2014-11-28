@@ -290,7 +290,7 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JPanel jpPanel;
     // End of variables declaration//GEN-END:variables
 
-    private void postaviAktivniPanel(JPanel panel) {
+    public void postaviAktivniPanel(JPanel panel) {
         if (aktivniPanel != null) {
             jpPanel.remove(aktivniPanel);
         }

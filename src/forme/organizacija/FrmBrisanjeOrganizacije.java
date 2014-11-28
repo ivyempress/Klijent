@@ -221,8 +221,12 @@ public class FrmBrisanjeOrganizacije extends javax.swing.JPanel {
                 toz.setParametar(o);
                 Komunikacija.vratiObjekat().posaljiZahtev(toz);
                 TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
+                if(too.getOdgovor()!=null){
                 JOptionPane.showMessageDialog(jtblTabelaOrganizacija, ""+too.getOdgovor()+" : "+o.getNazivOrganizacije(), "Brisanje organizacije", JOptionPane.INFORMATION_MESSAGE);
                 modelTabeleOrganizacija.obrisiOrganizaciju(izabraniRed);
+                }
+                else {JOptionPane.showMessageDialog(jtblTabelaOrganizacija, "Ne mozete da obrisete organizaciju, jer ona sadrzi aktivne clanove", "Brisanje organizacije", JOptionPane.ERROR_MESSAGE);
+               }
             } catch (IOException ex) {
                 Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

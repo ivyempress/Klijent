@@ -184,7 +184,10 @@ public class FrmUnosOrganizacije extends javax.swing.JPanel {
     }//GEN-LAST:event_jbtSacuvajActionPerformed
 
     private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
-        
+        jtfNazivOrganizacije.setText("");
+        jtfImeOsnivaca.setText("");
+        jtaOpisDelatnosti.setText("");
+        jdcDatumOsnivanja.setDate(null);
     }//GEN-LAST:event_jbtPonistiActionPerformed
 
 

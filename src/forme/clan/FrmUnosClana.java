@@ -5,7 +5,11 @@ import domen.Grad;
 import domen.Ljubimac;
 import domen.Organizacija;
 import domen.Zivotinja;
+import forme.FrmGlavna;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +70,6 @@ public class FrmUnosClana extends javax.swing.JPanel {
         jdcDatumSpasavanjaLjubimca = new com.toedter.calendar.JDateChooser();
         jbtDodajLjubimca = new javax.swing.JButton();
         jbtSacuvaj = new javax.swing.JButton();
-        jbtPonisti = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Unos novog člana", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Arial", 1, 10))); // NOI18N
 
@@ -161,8 +164,6 @@ public class FrmUnosClana extends javax.swing.JPanel {
             }
         });
 
-        jbtPonisti.setText("Poništi unos");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,10 +196,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
                             .addComponent(jcbOrganizacija, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jdcDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcbGrad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jbtSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                        .addComponent(jbtPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbtSacuvaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -238,9 +236,7 @@ public class FrmUnosClana extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpLjubimac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtPonisti)
-                    .addComponent(jbtSacuvaj))
+                .addComponent(jbtSacuvaj)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -254,6 +250,91 @@ public class FrmUnosClana extends javax.swing.JPanel {
     }//GEN-LAST:event_jcbZivotinjaActionPerformed
 
     private void jbtSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSacuvajActionPerformed
+       
+         /*
+        
+         Maticni broj se sastoji od 13 cifara u obliku "DD MM GGG RR BBB K"
+         DD - dan rodjenja
+         MM - mesec rodjenja
+         GGG - godina rodjenja
+         RR - Region
+         BBB - jedinstveni broj
+         K - kontrolni broj koji se izracunava po formuli
+        
+         Kontrolni broj se izracunava formulom gde je DDMMGGGRRBBBK = ABVGDĐEŽZIJKL
+        
+         L = 11 - (( 7*(A+E) + 6*(B+Ž) + 5*(V+Z) + 4*(G+I) + 3*(D+J) + 2*(Đ+K) ) % 11)
+        
+         ako je L izmedju 1i 9 K jednako tom broju L = K,
+         ako je L vece od 9 postaje 0
+        
+         */
+        char[] karakteri = jtfJmbg.getText().toCharArray();
+        int[] cifre = new int[jtfJmbg.getText().length()];
+
+//        Konverzija stringa u niz cifara
+        if (jtfJmbg.getText().length() != 13) {
+            JOptionPane.showMessageDialog(jpLjubimac, "Matični broj se sastoji od 13 cifara! \n Proverite unos!");
+            return;
+      //      throw new RuntimeException("Matični broj se sastoji od 13 cifara! \n Proverite unos!");
+           
+        } else {
+            for (int i = 0; i < karakteri.length; i++) {
+                if (Character.isDigit(karakteri[i])) {
+                    cifre[i] = Integer.parseInt(Character.toString(karakteri[i]));
+                } else {
+                    JOptionPane.showMessageDialog(jpLjubimac, "Matični broj se sastoji od 13 cifara! \\n Proverite unos!");
+            return;
+                    //throw new RuntimeException("Matični broj se sastoji od 13 cifara! \n Proverite unos!");
+                }
+            }
+
+        }
+
+//        Parsiranje i provera datuma rodjenja
+        DateFormat df = new SimpleDateFormat("ddMMyy");
+        try {
+            String datumString = jtfJmbg.getText().substring(0, 4) + jtfJmbg.getText().substring(5, 7);
+            Date datum = df.parse(datumString);
+        } catch (ParseException e) {
+             JOptionPane.showMessageDialog(jpLjubimac, "Matični broj nije validan!");
+             return;
+           // throw new RuntimeException("Matični broj nije validan!");
+            
+        }
+
+////        Racunanje i provera kontrolnog broja
+//        int unet = cifre[12];
+//
+//        int a = cifre[0];
+//        int b = cifre[1];
+//        int c = cifre[2];
+//        int d = cifre[3];
+//        int e = cifre[4];
+//        int f = cifre[5];
+//        int g = cifre[6];
+//        int h = cifre[7];
+//        int i = cifre[8];
+//        int j = cifre[9];
+//        int k = cifre[10];
+//        int l = cifre[11];
+//        int m = cifre[12];
+//
+//        int izracunat = 11 - ((7 * (a + g) + 6 * (b + h) + 5 * (c + i) + 4 * (d + j) + 3 * (e + k) + 2 * (f + l)) % 11);
+//        if (!(izracunat >= 1 && izracunat <= 9)) {
+//            izracunat = 0;
+//        }
+//
+//        if (unet != izracunat) {
+//           JOptionPane.showMessageDialog(jpLjubimac, "Matični broj nije validan!");
+//            return;
+//          //  throw new RuntimeException("Matični broj nije validan!");
+//        }
+//   
+
+        
+        
+        
         Date datumRodjenja = jdcDatumRodjenja.getDate();
         Date datumUclanjenja = jdcDatumUclanjenja.getDate();
         if (jtfJmbg.getText().isEmpty() || jtfIme.getText().isEmpty() || jtfPrezime.getText().isEmpty() || datumRodjenja == null || datumUclanjenja == null) {
@@ -319,7 +400,6 @@ public class FrmUnosClana extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jbtDodajLjubimca;
-    private javax.swing.JButton jbtPonisti;
     private javax.swing.JButton jbtSacuvaj;
     private javax.swing.JComboBox jcbGrad;
     private javax.swing.JComboBox jcbOrganizacija;
