@@ -25,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import komunikacija.Komunikacija;
+import kontroler.Clan.KKIFRMAzuriranjeClana;
 import transfer.TransferObjekatOdgovor;
 import transfer.TransferObjekatZahtev;
 import util.Konstante;
@@ -42,8 +43,8 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
 
     public FrmAzuriranjeClana() {
         initComponents();
-        srediFormu();
-        formatirajPolja(false);
+        KKIFRMAzuriranjeClana.srediFormu(jcbListaClanova);
+        KKIFRMAzuriranjeClana.formatirajPolja(Boolean.FALSE, jpClan, jpLjubimac, jtblLjubimci);
     }
 
     /**
@@ -337,8 +338,7 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(jcbListaClanova, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpClan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jpClan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -347,30 +347,12 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfJmbgActionPerformed
 
     private void jcbListaClanovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbListaClanovaActionPerformed
-        popuniPolja();
+            KKIFRMAzuriranjeClana.popuniPolja(jpClan, jpLjubimac, jtblLjubimci, jcbOrganizacija, jcbGrad, jtfJmbg, jcbListaClanova, jtfIme, jtfPrezime, jdcDatumRodjenja, jdcDatumUclanjenja, jcbZivotinja);
+   
     }//GEN-LAST:event_jcbListaClanovaActionPerformed
 
     private void jbtAzurirajClanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAzurirajClanaActionPerformed
-        try {
-            Clan clan = new Clan();
-            clan.setJmbg(jtfJmbg.getText());
-            clan.setIme(jtfIme.getText().trim());
-            clan.setPrezime(jtfPrezime.getText().trim());
-            clan.setDatumRodjenja(jdcDatumRodjenja.getDate());
-            clan.setDrzava((Grad) jcbGrad.getSelectedItem());
-            clan.setOrganizacija((Organizacija) jcbOrganizacija.getSelectedItem());
-            clan.setDatumUclanjenja(jdcDatumUclanjenja.getDate());
-            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.IZMENI_CLANA);
-            toZahtev.setParametar(clan);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor toOdgovor = Komunikacija.vratiObjekat().procitajOdgovor();
-            JOptionPane.showMessageDialog(jpLjubimac, toOdgovor.getOdgovor(), "Izmena clana", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException ex) {
-            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        KKIFRMAzuriranjeClana.azurirajClana(jtfJmbg, jtfIme, jtfPrezime, jdcDatumRodjenja, jcbGrad, jcbOrganizacija, jdcDatumUclanjenja, jpLjubimac);
     }//GEN-LAST:event_jbtAzurirajClanaActionPerformed
 
     private void jcbZivotinjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbZivotinjaActionPerformed
@@ -378,42 +360,12 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
     }//GEN-LAST:event_jcbZivotinjaActionPerformed
 
     private void jbtDodajLjubimca1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDodajLjubimca1ActionPerformed
-        try {
-            Date datumSpasavanjaLjubimca = jdcDatumSpasavanjaLjubimca.getDate();
-            if (jtfImeLjubimca.getText().isEmpty() || datumSpasavanjaLjubimca == null) {
-                JOptionPane.showMessageDialog(jpLjubimac, "Morate uneti sva polja na formi da bi dodali ljubmica", "Dodavanje ljubmica", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            ModelTabeleLjubimac mtlj = (ModelTabeleLjubimac) jtblLjubimci.getModel();
-
-            String imeLjubimca = jtfImeLjubimca.getText().trim();
-            Ljubimac ljubimac = new Ljubimac();
-            ljubimac.setVlasnik((Clan) jcbListaClanova.getSelectedItem());
-            ljubimac.setImeLjubimca(imeLjubimca);
-            ljubimac.setDatumSpasavanja(datumSpasavanjaLjubimca);
-            ljubimac.setVrstaZivotinje((Zivotinja) jcbZivotinja.getSelectedItem());
-            ljubimac.setLjubimacID(mtlj.getClan().getListaLjubimaca().size() + 1);
-            novaListaLjubimaca.add(ljubimac);
-            TransferObjekatZahtev tozAhtev = new TransferObjekatZahtev();
-            tozAhtev.setOperacija(Konstante.SACUVAJ_LJUBIMCA);
-            tozAhtev.setParametar(ljubimac);
-
-            Komunikacija.vratiObjekat().posaljiZahtev(tozAhtev);
-            TransferObjekatOdgovor to = Komunikacija.vratiObjekat().procitajOdgovor();
-            srediFormu();
-            mtlj.fireTableDataChanged();
-
-            JOptionPane.showMessageDialog(jpLjubimac, "Uspesno ste uneli ljubimca : " + ljubimac.getImeLjubimca(), imeLjubimca, JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException ex) {
-            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmAzuriranjeClana.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        KKIFRMAzuriranjeClana.dodajLjubimca(jdcDatumSpasavanjaLjubimca, jtfImeLjubimca, jpLjubimac, jtblLjubimci, jcbListaClanova, jcbZivotinja);
 
     }//GEN-LAST:event_jbtDodajLjubimca1ActionPerformed
 
     private void jbtPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPonistiActionPerformed
-        popuniPolja();
+        KKIFRMAzuriranjeClana.popuniPolja(jpClan, jpLjubimac, jtblLjubimci, jcbOrganizacija, jcbGrad, jtfJmbg, jcbListaClanova, jtfIme, jtfPrezime, jdcDatumRodjenja, jdcDatumUclanjenja, jcbZivotinja);
     }//GEN-LAST:event_jbtPonistiActionPerformed
 
 
@@ -451,97 +403,7 @@ public class FrmAzuriranjeClana extends javax.swing.JPanel {
     private javax.swing.JTextField jtfPrezime;
     // End of variables declaration//GEN-END:variables
 
-    private void srediFormu() {
-        try {
-            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.VRATI_SVE_CLANOVE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Clan> listaClanova = (List<Clan>) too.getRezultat();
-            jcbListaClanova.setModel(new DefaultComboBoxModel(listaClanova.toArray()));
-            //vracanje ljubimaca od svih clanova
-            for (Clan ck : listaClanova) {
 
-                toZahtev = new TransferObjekatZahtev();
-                toZahtev.setOperacija(Konstante.VRATI_SVE_LJUBIMCE);
-                toZahtev.setParametar(ck.getJmbg());
-                Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-                too = Komunikacija.vratiObjekat().procitajOdgovor();
-                List<Ljubimac> listaLjubimaca = (List<Ljubimac>) too.getRezultat();
-                ck.setListaLjubimaca(listaLjubimaca);
-            }
-            System.out.println("");
-        } catch (IOException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    private void formatirajPolja(Boolean b) {
-        for (Component c : jpClan.getComponents()) {
-            c.setEnabled(b);
-        }
-        for (Component c : jpLjubimac.getComponents()) {
-            c.setEnabled(b);
-        }
-        jtblLjubimci.setEnabled(b);
 
-    }
-
-    private void popuniPolja() {
-        formatirajPolja(true);
-        try {
-            TransferObjekatZahtev toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.VRATI_SVE_ORGANIZACIJE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            TransferObjekatOdgovor too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Organizacija> listaOrganizacija = (List<Organizacija>) too.getRezultat();
-            DefaultComboBoxModel dcbmOrganizacija = new DefaultComboBoxModel(listaOrganizacija.toArray());
-            jcbOrganizacija.setModel(dcbmOrganizacija);
-
-            toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.VRATI_SVE_GRADOVE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Grad> listaGradova = (List<Grad>) too.getRezultat();
-            DefaultComboBoxModel dcbmGrad = new DefaultComboBoxModel(listaGradova.toArray());
-            jcbGrad.setModel(dcbmGrad);
-
-            jtfJmbg.setEnabled(false);
-            Clan c = (Clan) jcbListaClanova.getSelectedItem();
-            jtfJmbg.setText(c.getJmbg());
-            jtfIme.setText(c.getIme());
-
-            jtfPrezime.setText(c.getPrezime());
-            jdcDatumRodjenja.setDate(c.getDatumRodjenja());
-            jdcDatumUclanjenja.setDate(c.getDatumUclanjenja());
-
-            dcbmGrad.setSelectedItem(c.getDrzava());
-            dcbmOrganizacija.setSelectedItem(c.getOrganizacija());
-
-            JComboBox jcbZivotinja2 = new JComboBox();
-
-            toZahtev = new TransferObjekatZahtev();
-            toZahtev.setOperacija(Konstante.VRATI_SVE_ZIVOTINJE);
-            Komunikacija.vratiObjekat().posaljiZahtev(toZahtev);
-            too = Komunikacija.vratiObjekat().procitajOdgovor();
-            List<Zivotinja> listaZivotinja = (List<Zivotinja>) too.getRezultat();
-            DefaultComboBoxModel boxModel = new DefaultComboBoxModel(listaZivotinja.toArray());
-            jcbZivotinja2.setModel(boxModel);
-            System.out.println(too.getOdgovor());
-
-            ModelTabeleLjubimac modelTabeleLjubimac = new ModelTabeleLjubimac(c, boxModel);
-            jtblLjubimci.setModel(modelTabeleLjubimac);
-
-            TableColumn column = jtblLjubimci.getColumnModel().getColumn(3);
-            column.setCellEditor(new DefaultCellEditor(jcbZivotinja2));
-            jcbZivotinja.setModel(boxModel);
-
-        } catch (IOException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmBrisanjeOrganizacije.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
